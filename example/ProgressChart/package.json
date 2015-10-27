@@ -1,0 +1,13 @@
+{
+  "name": "ProgressChart",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "art": "^0.10.0",
+    "react-native": "^0.13.2",
+    "react-native-circular-progress": "bgryszko/react-native-circular-progress"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "react-native-circular-progress",
+  "version": "0.0.1",
+  "description": "React Native component for creating animated, circular progress with ReactART",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bgryszko/react-native-circular-progress.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-component",
+    "progress",
+    "chart",
+    "react-art",
+    "art"
+  ],
+  "author": {
+    "name": "Bart Gryszko",
+    "email": "b@gryszko.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bgryszko/react-native-circular-progress/issues"
+  },
+  "homepage": "https://github.com/bgryszko/react-native-circular-progress",
+  "dependencies": {
+    "art": "^0.10.0"
+  }
+}
