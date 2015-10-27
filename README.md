@@ -60,7 +60,15 @@ You can configure the passing by following props:
 
 ## Working example
 
-You can find working example in the `example` directory of this repository.
+You can find working example in the `example` directory of this repository. You can run it by:
+
+```sh
+git clone https://github.com/bgryszko/react-native-circular-progress.git
+cd  react-native-circular-progress/example/ProgressChart
+npm install
+open ios/ProgressChart.xcodeproj
+```
+XCode will open. Click Run button and that's it.
 
 ## Screenshot of the example
 ![image](screenshot.gif)
