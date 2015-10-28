@@ -8,18 +8,21 @@ React Native component for creating animated, circular progress with ReactART. U
 1. Install library `npm i --save react-native-circular-progress`
 2. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`
 
+## Screenshot of example usage
+![image](screenshot.gif)
+
 ## Usage
 
-Import CircularChart or AnimatedCircularChart.
+Import CircularProgress or AnimatedCircularProgress.
 
 ```js
-import { AnimatedCircularChart } from 'react-native-progress-chart';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 ```
 
 Use as follows:
 
 ```jsx
-<AnimatedCircularChart
+<AnimatedCircularProgress
   size={120}
   width={15}
   fill={100}
@@ -30,7 +33,7 @@ Use as follows:
 You can also define a function, that'll receive current progress and for example display it inside the circle:
 
 ```jsx
-<AnimatedCircularChart
+<AnimatedCircularProgress
   size={200}
   width={3}
   fill={this.state.fill}
@@ -43,7 +46,7 @@ You can also define a function, that'll receive current progress and for example
       </Text>
     )
   }
-</AnimatedCircularChart>
+</AnimatedCircularProgress>
 ```
 
 ## Configuration
@@ -69,9 +72,6 @@ npm install
 open ios/ProgressChart.xcodeproj
 ```
 XCode will open. Click Run button and that's it.
-
-## Screenshot of the example
-![image](screenshot.gif)
 
 ## Special thanks
 Special thanks to [Chalk+Chisel](http://chalkchisel.com) for creating working environment where people grow. This component was created for one of the projects we're working on.
