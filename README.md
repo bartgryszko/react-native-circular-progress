@@ -2,14 +2,13 @@
 
 React Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example.
 
+## Example app
+![image](screenshot.gif)
 
 ## Installation
 
 1. Install library `npm i --save react-native-circular-progress`
 2. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`
-
-## Screenshot of example usage
-![image](screenshot.gif)
 
 ## Usage
 
@@ -61,7 +60,7 @@ You can configure the passing by following props:
 - **children(fill)** - you can pass function as a child to receive current fill
 
 
-## Working example
+## Working example app
 
 You can find working example in the `example` directory of this repository. You can run it by:
 
