@@ -8,6 +8,6 @@
   "dependencies": {
     "art": "^0.10.0",
     "react-native": "^0.13.2",
-    "react-native-circular-progress": "bgryszko/react-native-circular-progress"
+    "react-native-circular-progress": "0.0.1",
   }
 }
