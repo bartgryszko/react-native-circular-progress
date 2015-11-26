@@ -57,6 +57,7 @@ You can configure the passing by following props:
 - **fill** - current, percentage fill (from 0 to 100)
 - **tintColor** - color of a progress line
 - **backgroundColor** - color of a background for progress line
+- **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
 - **children(fill)** - you can pass function as a child to receive current fill
 
 
