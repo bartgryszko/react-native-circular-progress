@@ -1,15 +1,18 @@
-import React, { View, PropTypes, ReactNativeART } from 'react-native';
-import { Surface, Shape } from '../../react-native/Libraries/ART/ReactNativeART';
+import React, { View, PropTypes } from 'react-native';
+import { Surface, Shape, Path, Group } from '../../react-native/Libraries/ART/ReactNativeART';
 import MetricsPath from 'art/metrics/path';
 
 
 export default class CircularProgress extends React.Component {
 
   circlePath(cx, cy, r) {
-    return `M ${cx} ${cy}`
-      + `m ${r}, 0`
-      + `a ${r},${r} 0 1,1 -${r * 2},0`
-      + `a ${r},${r} 0 1,1 ${r * 2},0`;
+
+    return Path()
+      .moveTo(cx, cx)
+      .move(r, 0)
+      .arc(r * -2, 0, r, r)
+      .arc(r * 2, 0, r, r)
+      .close();
   }
 
   extractFill(fill) {
@@ -23,10 +26,9 @@ export default class CircularProgress extends React.Component {
   }
 
   render() {
-    const { size, width, tintColor, backgroundColor, style, children } = this.props;
+    const { size, width, tintColor, backgroundColor, style, rotation, children } = this.props;
 
     const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2);
-    const pathMetrics = MetricsPath(circlePath);
     const fill = this.extractFill(this.props.fill);
 
     return (
@@ -34,16 +36,18 @@ export default class CircularProgress extends React.Component {
         <Surface
           width={size}
           height={size}>
-          <Shape d={circlePath}
-            stroke={backgroundColor}
-            strokeCap="butt"
-            strokeDash={[pathMetrics.length, 700]}
-            strokeWidth={width} />
-          <Shape d={circlePath}
-            stroke={tintColor}
-            strokeCap="butt"
-            strokeDash={[pathMetrics.length * fill / 100, 700]}
-            strokeWidth={width} />
+          <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
+            <Shape d={circlePath}
+              stroke={backgroundColor}
+              strokeCap="butt"
+              strokeDash={[(size - width) * Math.PI, 700]}
+              strokeWidth={width} />
+            <Shape d={circlePath}
+              stroke={tintColor}
+              strokeCap="butt"
+              strokeDash={[(size - width) * Math.PI * fill / 100, 700]}
+              strokeWidth={width} />
+          </Group>
         </Surface>
         {
           children && children(fill)
@@ -60,10 +64,12 @@ CircularProgress.propTypes = {
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
+  rotation: PropTypes.number,
   children: PropTypes.func
 }
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
-  backgroundColor: '#e4e4e4'
+  backgroundColor: '#e4e4e4',
+  rotation: 90
 }
