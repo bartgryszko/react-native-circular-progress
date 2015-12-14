@@ -1,2 +1,5 @@
-module.exports.CircularProgress = require('./src/CircularProgress');
-module.exports.AnimatedCircularProgress = require('./src/AnimatedCircularProgress');
+import CircularProgress from './src/CircularProgress';
+import AnimatedCircularProgress from './src/AnimatedCircularProgress';
+
+exports.CircularProgress = CircularProgress;
+exports.AnimatedCircularProgress = AnimatedCircularProgress;
