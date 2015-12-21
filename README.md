@@ -55,6 +55,7 @@ You can configure the passing by following props:
 - **size** – width and height of the circle
 - **width** - thickness of the line
 - **fill** - current, percentage fill (from 0 to 100)
+- **prefill** - percentage fill before the animation (from 0 to 100)
 - **tintColor** - color of a progress line
 - **backgroundColor** - color of a background for progress line
 - **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360

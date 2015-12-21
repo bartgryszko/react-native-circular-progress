@@ -5,10 +5,10 @@ const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
 export default class AnimatedCircularProgress extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      chartFillAnimation: new Animated.Value(0)
+      chartFillAnimation: new Animated.Value(props.prefill || 0)
     }
   }
 
@@ -34,7 +34,7 @@ export default class AnimatedCircularProgress extends React.Component {
   }
 
   render() {
-    const { fill, ...other } = this.props;
+    const { fill, prefill, ...other } = this.props;
 
     return (
       <AnimatedProgress
@@ -49,7 +49,8 @@ AnimatedCircularProgress.propTypes = {
   style: PropTypes.object,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
+  prefill: PropTypes.number,
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
 }
