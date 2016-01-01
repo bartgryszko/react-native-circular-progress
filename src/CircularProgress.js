@@ -39,13 +39,11 @@ export default class CircularProgress extends React.Component {
           <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
             <Shape d={circlePath}
               stroke={backgroundColor}
-              strokeCap="butt"
-              strokeDash={[(size - width) * Math.PI, 700]}
               strokeWidth={width} />
             <Shape d={circlePath}
               stroke={tintColor}
               strokeCap="butt"
-              strokeDash={[(size - width) * Math.PI * fill / 100, 700]}
+              strokeDash={[(size - width) * Math.PI * fill / 100, 9999]}
               strokeWidth={width} />
           </Group>
         </Surface>
