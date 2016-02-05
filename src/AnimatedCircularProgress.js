@@ -2,7 +2,6 @@ import React, { PropTypes, Animated } from 'react-native';
 import CircularProgress from './CircularProgress';
 const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
-
 export default class AnimatedCircularProgress extends React.Component {
 
   constructor(props) {
@@ -23,12 +22,14 @@ export default class AnimatedCircularProgress extends React.Component {
   }
 
   animateFill() {
+    const { tension, friction } = this.props;
+
     Animated.spring(
       this.state.chartFillAnimation,
       {
         toValue: this.props.fill,
-        tension: 7,
-        friction: 10
+        tension,
+        friction
       }
     ).start();
   }
@@ -53,4 +54,11 @@ AnimatedCircularProgress.propTypes = {
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
+  tension: PropTypes.number,
+  friction: PropTypes.number
 }
+
+AnimatedCircularProgress.defaultProps = {
+  tension: 7,
+  friction: 10
+};
