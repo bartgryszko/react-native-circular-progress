@@ -59,7 +59,8 @@ You can configure the passing by following props:
 - **tintColor** - color of a progress line
 - **backgroundColor** - color of a background for progress line
 - **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
-- **speed** - speed of the animation, either 'slow' or 'fast'
+- **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
+- **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **children(fill)** - you can pass function as a child to receive current fill
 
 
