@@ -22,15 +22,11 @@ export default class AnimatedCircularProgress extends React.Component {
   }
 
   animateFill() {
-    const { tension, friction } = this.props;
-
-    Animated.spring(
+    this.props.animation(
       this.state.chartFillAnimation,
-      {
+      Object.assign({
         toValue: this.props.fill,
-        tension,
-        friction
-      }
+      }, this.props.animationOptions)
     ).start();
   }
 
@@ -54,11 +50,14 @@ AnimatedCircularProgress.propTypes = {
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
-  tension: PropTypes.number,
-  friction: PropTypes.number
+  animation: PropTypes.func,
+  animationOptions: PropTypes.object,
 }
 
 AnimatedCircularProgress.defaultProps = {
-  tension: 7,
-  friction: 10
+  animation: Animated.spring,
+  animationOptions: {
+    tension: 7,
+    friction: 10,
+  },
 };
