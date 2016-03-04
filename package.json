@@ -1,6 +1,6 @@
 {
   "name": "react-native-circular-progress",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React Native component for creating animated, circular progress with ReactART",
   "main": "index.js",
   "repository": {
