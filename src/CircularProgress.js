@@ -61,7 +61,7 @@ export default class CircularProgress extends React.Component {
 }
 
 CircularProgress.propTypes = {
-  style: PropTypes.object,
+  style: View.propTypes.style,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
