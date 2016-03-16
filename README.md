@@ -76,5 +76,11 @@ open ios/ProgressChart.xcodeproj
 ```
 XCode will open. Click Run button and that's it.
 
+
+## License
+
+MIT
+
+
 ## Special thanks
 Special thanks to [Chalk+Chisel](http://chalkchisel.com) for creating working environment where people grow. This component was created for one of the projects we're working on.
