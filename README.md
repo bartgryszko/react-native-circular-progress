@@ -29,6 +29,19 @@ Use as follows:
   backgroundColor="#3d5875" />
 ```
 
+You can specify an animation function along with some options if you don't want to use the `spring` animation:
+
+```jsx
+<AnimatedCircularProgress
+  size={120}
+  width={15}
+  fill={100}
+  tintColor="#00e0ff"
+  backgroundColor="#3d5875"
+  animation={Animated.timing}
+  animationOptions={{duration: 1000, easing: Easing.linear}} />
+```
+
 You can also define a function, that'll receive current progress and for example display it inside the circle:
 
 ```jsx
@@ -70,8 +83,8 @@ You can configure the passing by following props:
 - **tintColor** - color of a progress line
 - **backgroundColor** - color of a background for progress line
 - **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
-- **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
-- **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
+- **animation** - animation function to use (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
+- **animationOptions** - options to pass to the animation function (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **children(fill)** - you can pass function as a child to receive current fill
 
 

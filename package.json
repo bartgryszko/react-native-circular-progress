@@ -20,6 +20,9 @@
     "name": "Bart Gryszko",
     "email": "b@gryszko.com"
   },
+  "contributors": [
+    {"name": "Benjamin Paap", "email": "benjamin.paap@gmail.com"}
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bgryszko/react-native-circular-progress/issues"
