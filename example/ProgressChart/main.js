@@ -56,14 +56,18 @@ class ProgressChart extends React.Component {
           width={3}
           fill={fill}
           tintColor="#00e0ff"
-          backgroundColor="#3d5875">
-          {
-            (fill) => (
-              <Text style={styles.points}>
-                { Math.round(MAX_POINTS * fill / 100) }
-              </Text>
-            )
+          backgroundColor="#3d5875"
+          showText={true}
+          formatProgress={
+            fill => {
+              return Math.round(MAX_POINTS * fill / 100);
+            }
           }
+          textStyle={{
+            fontSize: 38,
+            color: "#00e0ff",
+            }}
+          >
         </AnimatedCircularProgress>
 
         <AnimatedCircularProgress
@@ -71,7 +75,8 @@ class ProgressChart extends React.Component {
           width={15}
           fill={fill}
           tintColor="#00e0ff"
-          backgroundColor="#3d5875" />
+          backgroundColor="#3d5875"
+          showText={true} />
 
         <AnimatedCircularProgress
           size={100}
