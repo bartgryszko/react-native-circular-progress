@@ -62,7 +62,7 @@ export default class CircularProgress extends React.Component {
   }
 
   renderText() {
-    const { size, width, showText, textColor } = this.props;
+    const { size, width, showText, textColor, textStyle } = this.props;
     if(!showText) {
       return null;
     }
@@ -81,11 +81,9 @@ export default class CircularProgress extends React.Component {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text style={{
-        color: textColor,
-        fontSize: textSize / 4.5,
-        fontWeight: '300',
-      }}>{this.props.formatProgress(fill)}</Text>
+        <Text style={textStyle}>
+        {this.props.formatProgress(fill)}
+        </Text>
       </View>
     );
   }
@@ -100,18 +98,21 @@ CircularProgress.propTypes = {
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
   children: PropTypes.func,
-  textColor: PropTypes.string,
   showText: PropTypes.bool,
   formatProgress: PropTypes.func,
+  textStyle: Text.propTypes.style,
 }
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
   backgroundColor: '#e4e4e4',
   rotation: 90,
-  textColor: 'black',
   showText: false,
   formatProgress: (text) => {
     return Math.round(text) + '%';
+  },
+  textStyle: {
+    color: 'black',
+    fontSize: 18,
   }
 }
