@@ -37,14 +37,8 @@ You can also define a function, that'll receive current progress and for example
   width={3}
   fill={this.state.fill}
   tintColor="#00e0ff"
-  backgroundColor="#3d5875">
-  {
-    (fill) => (
-      <Text style={styles.points}>
-        { this.state.fill }
-      </Text>
-    )
-  }
+  backgroundColor="#3d5875" 
+  showText={true} >
 </AnimatedCircularProgress>
 ```
 
@@ -73,6 +67,9 @@ You can configure the passing by following props:
 - **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **children(fill)** - you can pass function as a child to receive current fill
+- **showText** - show progress value inside the circle
+- **textStyle** - text style
+- **formatProgress(fill)** - format progress value
 
 
 ## Working example app
