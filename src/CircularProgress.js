@@ -1,24 +1,30 @@
 import React, { PropTypes } from 'react';
 import { View, Platform } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
-import MetricsPath from 'art/metrics/path';
+import Svg, { G, Path } from 'react-native-svg';
 
 export default class CircularProgress extends React.Component {
 
-  circlePath(cx, cy, r, startDegree, endDegree) {
+  polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
-    let p = Path();
-    if (Platform.OS === 'ios') {
-      p.path.push(0, cx + r, cy);
-      p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
-    } else {
-      // For Android we have to resort to drawing low-level Path primitives, as ART does not support 
-      // arbitrary circle segments. It also does not support strokeDash.
-      // Furthermore, the ART implementation seems to be buggy/different than the iOS one.
-      // MoveTo is not needed on Android 
-      p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, (startDegree - endDegree) * Math.PI / 180, 0);
-    }
-    return p;
+    return {
+      x: centerX + (radius * Math.cos(angleInRadians)),
+      y: centerY + (radius * Math.sin(angleInRadians))
+    };
+  }
+
+  circlePath(x, y, radius, startAngle, endAngle) {
+    const start = this.polarToCartesian(x, y, radius, endAngle);
+    const end = this.polarToCartesian(x, y, radius, startAngle);
+
+    const arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
+
+    const d = [
+      'M', start.x, start.y,
+      'A', radius, radius, 0, arcSweep, 0, end.x, end.y
+    ].join(' ');
+
+    return d;
   }
 
   extractFill(fill) {
@@ -32,31 +38,35 @@ export default class CircularProgress extends React.Component {
   }
 
   render() {
-    const { size, width, tintColor, backgroundColor, style, rotation, children } = this.props;
+    const { size, width, tintColor, backgroundColor, rotation, style, children } = this.props;
     const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360);
 
-    const fill = this.extractFill(this.props.fill);
+    const fill = this.extractFill((this.props.fill === 100) ? 99.999 : this.props.fill);
     const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * fill / 100);
 
     return (
       <View style={style}>
         <Svg
           width={size}
-          height={size}>
+          height={size}
+        >
           <G
             rotate={rotation - 90}
-            origin={(size/2),(size/2)}
+            originX={(size / 2)}
+            originY={(size / 2)}
           >
             <Path
               d={backgroundPath}
               stroke={backgroundColor}
               strokeWidth={width}
+              fill="none"
             />
             <Path
               d={circlePath}
               stroke={tintColor}
               strokeWidth={width}
               strokeLinecap="butt"
+              fill="none"
             />
           </G>
         </Svg>
@@ -64,23 +74,24 @@ export default class CircularProgress extends React.Component {
           children && children(fill)
         }
       </View>
-    )
+    );
   }
+
 }
 
 CircularProgress.propTypes = {
-  style: View.propTypes.style,
-  size: PropTypes.number.isRequired,
-  fill: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
+  children: PropTypes.func,
+  fill: PropTypes.number.isRequired,
   rotation: PropTypes.number,
-  children: PropTypes.func
-}
+  size: PropTypes.number.isRequired,
+  style: View.propTypes.style,
+  tintColor: PropTypes.string,
+  width: PropTypes.number.isRequired
+};
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
   backgroundColor: '#e4e4e4',
   rotation: 90
-}
+};
