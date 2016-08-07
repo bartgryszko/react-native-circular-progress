@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 
 export default class CircularProgress extends React.Component {
