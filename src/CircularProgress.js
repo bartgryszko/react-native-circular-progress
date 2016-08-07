@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { View, Platform } from 'react-native';
-import { Surface, Shape, Path, Group } from '../../react-native/Libraries/ART/ReactNativeART';
+import Svg, { Path } from 'react-native-svg';
 import MetricsPath from 'art/metrics/path';
 
 export default class CircularProgress extends React.Component {
@@ -40,19 +40,26 @@ export default class CircularProgress extends React.Component {
 
     return (
       <View style={style}>
-        <Surface
+        <Svg
           width={size}
           height={size}>
-          <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
-            <Shape d={backgroundPath}
-                   stroke={backgroundColor}
-                   strokeWidth={width}/>
-            <Shape d={circlePath}
-                   stroke={tintColor}
-                   strokeWidth={width}
-                   strokeCap="butt"/>
-          </Group>
-        </Surface>
+          <G
+            rotate={rotation - 90}
+            origin={(size/2),(size/2)}
+          >
+            <Path
+              d={backgroundPath}
+              stroke={backgroundColor}
+              strokeWidth={width}
+            />
+            <Path
+              d={circlePath}
+              stroke={tintColor}
+              strokeWidth={width}
+              strokeLinecap="butt"
+            />
+          </G>
+        </Svg>
         {
           children && children(fill)
         }
