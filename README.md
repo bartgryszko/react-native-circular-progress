@@ -72,6 +72,7 @@ You can configure the passing by following props:
 - **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
 - **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
+- **linecap** - the shape to be used at the ends of the circle. Possible values: butt (default), round or square. (see [here](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-linecap))
 - **children(fill)** - you can pass function as a child to receive current fill
 
 
