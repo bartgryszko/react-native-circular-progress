@@ -1,3 +1,8 @@
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+[![Version](https://img.shields.io/npm/v/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
+[![npm](https://img.shields.io/npm/dt/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
+[![Twitter Follow](https://img.shields.io/twitter/follow/bgryszko.svg?style=social&label=Follow)](https://twitter.com/bgryszko)
+
 # react-native-circular-progress
 
 React Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example.
@@ -87,6 +92,13 @@ npm install
 open ios/ProgressChart.xcodeproj
 ```
 XCode will open. Click Run button and that's it.
+
+
+## Author
+
+Bartosz Gryszko (b@gryszko.com)
+
+For new components and updates [follow me on twitter](http://twitter.com/bgryszko).
 
 
 ## License
