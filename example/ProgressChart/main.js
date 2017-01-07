@@ -1,4 +1,5 @@
-import React, { AppRegistry, StyleSheet, Text, View, PanResponder } from 'react-native';
+import React from 'react';
+import { AppRegistry, StyleSheet, Text, View, PanResponder } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const MAX_POINTS = 500;
@@ -15,8 +16,6 @@ class ProgressChart extends React.Component {
   }
 
   componentWillMount() {
-    console.log('WILL MOUNT');
-
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
