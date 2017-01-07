@@ -5,7 +5,7 @@
 
 # react-native-circular-progress
 
-React Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example.
+React Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example. **Works on iOS & Android.**
 
 ## Example app
 ![image](screenshot.gif)
@@ -85,6 +85,8 @@ You can configure the passing by following props:
 
 You can find working example in the `example` directory of this repository. You can run it by:
 
+### iOS
+
 ```sh
 git clone https://github.com/bgryszko/react-native-circular-progress.git
 cd  react-native-circular-progress/example/ProgressChart
@@ -93,6 +95,16 @@ open ios/ProgressChart.xcodeproj
 ```
 XCode will open. Click Run button and that's it.
 
+### Android
+
+Open your emulator and run:
+
+```sh
+git clone https://github.com/bgryszko/react-native-circular-progress.git
+cd  react-native-circular-progress/example/ProgressChart
+npm install
+react-native run-android
+```
 
 ## Author
 
