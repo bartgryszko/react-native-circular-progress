@@ -32,18 +32,25 @@ export default class CircularProgress extends React.Component {
   }
 
   render() {
-    const { size, width, tintColor, backgroundColor, style, rotation, linecap, arcSweepAngle, children } = this.props;
+    const { size, width, tintColor, backgroundColor, style, rotation, linecap, arcSweepAngle, children, capWidth, capColor, strokeCap } = this.props;
+      const borderWidth = capWidth > width ? capWidth : width;
+      const radius = (size-borderWidth)/2;
+      const center = size/2;
     const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
 
     const fill = this.extractFill(this.props.fill);
     const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * fill / 100);
+
+      const radian = Math.PI * fill/50;
+      const capX = radius * Math.cos(radian) + center;
+      const capY = radius * Math.sin(radian) + center;
 
     return (
       <View style={style}>
         <Surface
           width={size}
           height={size}>
-          <Group rotation={rotation+(360-arcSweepAngle)/2} originX={size/2} originY={size/2}>
+          <Group rotation={rotation+(360-arcSweepAngle)/2} originX={center} originY={center}>
             <Shape d={backgroundPath}
                    stroke={backgroundColor}
                    strokeWidth={width}
@@ -52,6 +59,9 @@ export default class CircularProgress extends React.Component {
                    stroke={tintColor}
                    strokeWidth={width}
                    strokeCap={linecap}/>
+            <Shape d={this.circlePath(capX, capY, capWidth/4, 0, 360)}
+                   stroke={capColor}
+                   strokeWidth={capWidth/2}/>
           </Group>
         </Surface>
         {
@@ -67,6 +77,8 @@ CircularProgress.propTypes = {
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
+  capColor: PropTypes.string,
+  capWidth: PropTypes.number,
   tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
@@ -80,5 +92,7 @@ CircularProgress.defaultProps = {
   backgroundColor: '#e4e4e4',
   rotation: 90,
   linecap: 'butt',
-  arcSweepAngle: 360
+  arcSweepAngle: 360,
+    capColor: 'black',
+    capWidth: 0
 }
