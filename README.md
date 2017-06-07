@@ -83,6 +83,7 @@ You can configure the passing by following props:
 - **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
 - **linecap** - the shape to be used at the ends of the circle. Possible values: butt (default), round or square. (see [here](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-linecap))
+- **arcSweepAngle** - the angle that you want your arc to sweep in the case where you don't want a full circle. Default is 360.
 - **children(fill)** - you can pass function as a child to receive current fill
 
 

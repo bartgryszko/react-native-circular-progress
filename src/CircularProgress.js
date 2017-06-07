@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { View, Platform } from 'react-native';
-import { Surface, Shape, Path, Group } from '../../react-native/Libraries/ART/ReactNativeART';
+import { Surface, Shape, Path, Group, Filter } from '../../react-native/Libraries/ART/ReactNativeART';
 import MetricsPath from 'art/metrics/path';
 
 export default class CircularProgress extends React.Component {
@@ -32,21 +32,22 @@ export default class CircularProgress extends React.Component {
   }
 
   render() {
-    const { size, width, tintColor, backgroundColor, style, rotation, linecap, children } = this.props;
-    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360);
+    const { size, width, tintColor, backgroundColor, style, rotation, linecap, arcSweepAngle, children } = this.props;
+    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
 
     const fill = this.extractFill(this.props.fill);
-    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * fill / 100);
+    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * fill / 100);
 
     return (
       <View style={style}>
         <Surface
           width={size}
           height={size}>
-          <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
+          <Group rotation={rotation+(360-arcSweepAngle)/2} originX={size/2} originY={size/2}>
             <Shape d={backgroundPath}
                    stroke={backgroundColor}
-                   strokeWidth={width}/>
+                   strokeWidth={width}
+                   strokeCap={linecap}/>
             <Shape d={circlePath}
                    stroke={tintColor}
                    strokeWidth={width}
@@ -70,12 +71,14 @@ CircularProgress.propTypes = {
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
   linecap: PropTypes.string,
-  children: PropTypes.func
+  children: PropTypes.func,
+  arcSweepAngle: PropTypes.number
 }
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
   backgroundColor: '#e4e4e4',
   rotation: 90,
-  linecap: 'butt'
+  linecap: 'butt',
+  arcSweepAngle: 360
 }
