@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
-import { View, Animated } from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, Animated, ViewPropTypes } from 'react-native';
 import CircularProgress from './CircularProgress';
 const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
-export default class AnimatedCircularProgress extends React.Component {
+export default class AnimatedCircularProgress extends Component {
 
   constructor(props) {
     super(props);
@@ -55,7 +56,7 @@ export default class AnimatedCircularProgress extends React.Component {
 }
 
 AnimatedCircularProgress.propTypes = {
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number,
   prefill: PropTypes.number,
