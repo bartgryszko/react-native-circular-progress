@@ -8,16 +8,8 @@ export default class CircularProgress extends React.Component {
   circlePath(cx, cy, r, startDegree, endDegree) {
 
     let p = Path();
-    if (Platform.OS === 'ios') {
-      p.path.push(0, cx + r, cy);
-      p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
-    } else {
-      // For Android we have to resort to drawing low-level Path primitives, as ART does not support 
-      // arbitrary circle segments. It also does not support strokeDash.
-      // Furthermore, the ART implementation seems to be buggy/different than the iOS one.
-      // MoveTo is not needed on Android 
-      p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, (startDegree - endDegree) * Math.PI / 180, 0);
-    }
+    p.path.push(0, cx + r, cy);
+    p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
     return p;
   }
 
@@ -33,10 +25,10 @@ export default class CircularProgress extends React.Component {
 
   render() {
     const { size, width, tintColor, backgroundColor, style, rotation, linecap, children } = this.props;
-    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360);
+    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * 99.9 / 100);
 
-    const fill = this.extractFill(this.props.fill);
-    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * fill / 100);
+    const fill = this.extractFill(this.props.fill);    
+    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (360 * .99) * fill / 100);
 
     return (
       <View style={style}>
