@@ -1,7 +1,7 @@
 {
   "name": "react-native-circular-progress",
-  "version": "0.0.8",
-  "description": "React Native component for creating animated, circular progress with ReactART",
+  "version": "0.0.9",
+  "description": "React Native component for creating animated, circular progress with ReactART. this is fork of original by bgryszko. it fixes android lock screen bug and view proptypes deprecation to support latest react native version 0.49.",
   "main": "index.js",
   "repository": {
     "type": "git",
