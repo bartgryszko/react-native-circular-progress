@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ViewPropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { AppState, View, Animated, ViewPropTypes } from 'react-native';
 import CircularProgress from '../node_modules/react-native-circular-progress/src/CircularProgress';
 

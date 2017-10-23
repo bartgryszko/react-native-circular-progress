@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/bgryszko/react-native-circular-progress.git"
+    "url": "git+ssh://git@github.com/gamingumar/react-native-circular-progress.git"
   },
   "keywords": [
     "react",
@@ -17,14 +17,14 @@
     "art"
   ],
   "author": {
-    "name": "Bart Gryszko",
-    "email": "b@gryszko.com"
+    "name": "Umar Aamer",
+    "email": "umaraamer@gmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bgryszko/react-native-circular-progress/issues"
+    "url": "https://github.com/gamingumar/react-native-circular-progress/issues"
   },
-  "homepage": "https://github.com/bgryszko/react-native-circular-progress",
+  "homepage": "https://github.com/gamingumar/react-native-circular-progress",
   "dependencies": {
     "art": "^0.10.0"
   }
