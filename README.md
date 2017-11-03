@@ -7,6 +7,11 @@
 
 React Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example. **Works on iOS & Android.**
 
+** this is the fork of original https://github.com/bgryszko/react-native-circular-progress
+** it fixes the following issues:
+*** android bug after unlock
+*** view proptypes deprecation in latest react native 0.49
+
 ---
 **Looking for a circular slider?** Take a look at my other component – [react-native-circular-slider](https://github.com/bgryszko/react-native-circular-slider) :alarm_clock:
 
@@ -17,7 +22,8 @@ React Native component for creating animated, circular progress with ReactART. U
 
 ## Installation
 
-1. Install library `npm i --save react-native-circular-progress`
+1. Install library `npm i --save git+https://github.com/gamingumar/react-native-circular-progress.git`
+  yarn add git+https://github.com/gamingumar/react-native-circular-progress.git
 2. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`
 
 ## Usage
