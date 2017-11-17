@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Platform } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 import { Surface, Shape, Path, Group } from '../../react-native/Libraries/ART/ReactNativeART';
 import MetricsPath from 'art/metrics/path';
 
@@ -28,7 +28,7 @@ export default class CircularProgress extends React.Component {
     const { size, width, tintColor, backgroundColor, style, rotation, linecap, children } = this.props;
     const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * .9999);
 
-    const fill = this.extractFill(this.props.fill);    
+    const fill = this.extractFill(this.props.fill);
     const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (360 * .9999) * fill / 100);
 
     return (
@@ -55,7 +55,7 @@ export default class CircularProgress extends React.Component {
 }
 
 CircularProgress.propTypes = {
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
