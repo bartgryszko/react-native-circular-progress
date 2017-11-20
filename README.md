@@ -74,7 +74,8 @@ this.refs.circularProgress.performLinearAnimation(100, 8000); // Will fill the p
 You can configure the passing by following props:
 
 - **size** – width and height of the circle
-- **width** - thickness of the line
+- **width** - thickness of the lines
+- **backgroundWidth** - thickness of the background line
 - **fill** - current, percentage fill (from 0 to 100)
 - **prefill** - percentage fill before the animation (from 0 to 100)
 - **tintColor** - color of a progress line
