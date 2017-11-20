@@ -90,24 +90,14 @@ You can configure the passing by following props:
 - **onAnimationComplete** - you can pass a callback function that will be invoked when animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
 - **onLinearAnimationComplete** - you can pass a callback function that will be invoked when linear animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
 
-## Circular progress bar example app
-
-You can find working application in the `expoexample` directory of this repository.
-
-Be sure you have [Expo](https://expo.io/) installed first (also `npm install -g exp`).
-You can run it by:
-
-### 
+## Running example app
 
 ```sh
 git clone https://github.com/bgryszko/react-native-circular-progress.git
-cd  react-native-circular-progress/expoexample/progresschart
-npm install
-exp start
-exp ios
+cd  react-native-circular-progress/example
+yarn
+yarn start
 ```
-
-iOS simulator will start and launch the app.
 
 ## Author
 

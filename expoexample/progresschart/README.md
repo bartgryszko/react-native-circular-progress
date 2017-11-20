@@ -1,1 +1,0 @@
-npm install & Run using the Expo XDE.

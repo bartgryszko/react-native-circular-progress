@@ -1,19 +1,21 @@
 import React from 'react';
+<<<<<<< HEAD:expoexample/progresschart/ProgressChart.js
 import { AppRegistry, Button, StyleSheet, Text, View, PanResponder } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+=======
+import { StyleSheet, Text, View, PanResponder } from 'react-native';
+import { CircularProgress, AnimatedCircularProgress } from 'react-native-circular-progress';
+>>>>>>> Update expo example:example/App.js
 
 const MAX_POINTS = 500;
 
-export default class ProgressChart extends React.Component {
+export default class Example extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      isMoving: false,
-      pointsDelta: 0,
-      points: 325
-    };
-  }
+  state = {
+    isMoving: false,
+    pointsDelta: 0,
+    points: 325
+  };
 
   componentWillMount() {
     this._panResponder = PanResponder.create({
@@ -73,8 +75,8 @@ export default class ProgressChart extends React.Component {
           backgroundWidth={5}
           fill={fill}
           tintColor="#00e0ff"
-          onAnimationComplete={() => console.log('onAnimationComplete')}
-          backgroundColor="#3d5875" />
+          backgroundColor="#3d5875"
+        />
 
         <AnimatedCircularProgress
           size={100}
@@ -121,3 +123,4 @@ const styles = StyleSheet.create({
     color: '#fff',
   }
 });
+
