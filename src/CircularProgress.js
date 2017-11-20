@@ -1,7 +1,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import React, { PropTypes } from 'react';
 import { View, ViewPropTypes, Platform, ART } from 'react-native';
 const { Surface, Shape, Path, Group } = ART;
 import MetricsPath from 'art/metrics/path';
