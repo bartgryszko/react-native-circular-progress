@@ -18,7 +18,8 @@ React Native component for creating animated, circular progress with ReactART. U
 ## Installation
 
 1. Install library `npm i --save react-native-circular-progress`
-2. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`
+2. As Expo user you are good to go right now, or alternatively install ART:
+3. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`
 
 ## Usage
 
@@ -89,28 +90,25 @@ You can configure the passing by following props:
 - **onLinearAnimationComplete** - you can pass a callback function that will be invoked when linear animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
 ## Working example app
 
-You can find working example in the `example` directory of this repository. You can run it by:
 
-### iOS
+## Circular progress bar example app
 
-```sh
-git clone https://github.com/bgryszko/react-native-circular-progress.git
-cd  react-native-circular-progress/example/ProgressChart
-npm install
-open ios/ProgressChart.xcodeproj
-```
-XCode will open. Click Run button and that's it.
+You can find working application in the `expoexample` directory of this repository.
 
-### Android
+Be sure you have [Expo](https://expo.io/) installed first (also `npm install -g exp`).
+You can run it by:
 
-Open your emulator and run:
+### 
 
 ```sh
 git clone https://github.com/bgryszko/react-native-circular-progress.git
-cd  react-native-circular-progress/example/ProgressChart
+cd  react-native-circular-progress/expoexample/progresschart
 npm install
-react-native run-android
+exp start
+exp ios
 ```
+
+iOS simulator will start and launch the app.
 
 ## Author
 
@@ -122,7 +120,6 @@ For new components and updates [follow me on twitter](http://twitter.com/bgryszk
 ## License
 
 MIT
-
 
 ## Special thanks
 Special thanks to [Chalk+Chisel](http://chalkchisel.com) for creating working environment where people grow. This component was created for one of the projects we're working on.

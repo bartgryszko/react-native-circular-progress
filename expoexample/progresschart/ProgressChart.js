@@ -68,6 +68,7 @@ export default class ProgressChart extends React.Component {
         <AnimatedCircularProgress
           size={120}
           width={15}
+          backgroundWidth={5}
           fill={fill}
           tintColor="#00e0ff"
           backgroundColor="#3d5875" />
