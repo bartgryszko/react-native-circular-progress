@@ -71,6 +71,7 @@ export default class ProgressChart extends React.Component {
           backgroundWidth={5}
           fill={fill}
           tintColor="#00e0ff"
+          onAnimationComplete={() => console.log('onAnimationComplete')}
           backgroundColor="#3d5875" />
 
         <AnimatedCircularProgress

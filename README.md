@@ -37,6 +37,7 @@ Use as follows:
   width={15}
   fill={100}
   tintColor="#00e0ff"
+  onAnimationComplete={() => console.log('onAnimationComplete')}
   backgroundColor="#3d5875" />
 ```
 
@@ -88,8 +89,6 @@ You can configure the passing by following props:
 - **children(fill)** - you can pass function as a child to receive current fill
 - **onAnimationComplete** - you can pass a callback function that will be invoked when animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
 - **onLinearAnimationComplete** - you can pass a callback function that will be invoked when linear animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
-## Working example app
-
 
 ## Circular progress bar example app
 
