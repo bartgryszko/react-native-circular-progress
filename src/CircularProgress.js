@@ -16,13 +16,7 @@ export default class CircularProgress extends React.Component {
   }
 
   extractFill(fill) {
-    if (fill < 0.01) {
-      return 0;
-    } else if (fill > 100) {
-      return 100;
-    }
-
-    return fill;
+    return Math.min(100, Math.max(0, fill));
   }
 
   render() {
