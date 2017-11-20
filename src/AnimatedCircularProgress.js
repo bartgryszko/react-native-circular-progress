@@ -24,7 +24,7 @@ export default class AnimatedCircularProgress extends React.Component {
   }
 
   animateFill() {
-    const { tension, friction } = this.props;
+    const { tension, friction, animationComplete } = this.props;
 
     Animated.spring(
       this.state.chartFillAnimation,
@@ -33,7 +33,7 @@ export default class AnimatedCircularProgress extends React.Component {
         tension,
         friction
       }
-    ).start();
+    ).start(animationComplete);
   }
 
   performLinearAnimation(toValue, duration) {
@@ -64,7 +64,8 @@ AnimatedCircularProgress.propTypes = {
   tintColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   backgroundColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   tension: PropTypes.number,
-  friction: PropTypes.number
+  friction: PropTypes.number,
+  animationComplete: PropTypes.func
 }
 
 AnimatedCircularProgress.defaultProps = {
