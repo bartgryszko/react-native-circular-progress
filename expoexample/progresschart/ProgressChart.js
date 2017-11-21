@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, StyleSheet, Text, View, PanResponder } from 'react-native';
+import { AppRegistry, Button, StyleSheet, Text, View, PanResponder } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const MAX_POINTS = 500;
@@ -27,11 +27,13 @@ export default class ProgressChart extends React.Component {
       },
 
       onPanResponderMove: (evt, gestureState) => {
+        this.refs.circularProgress.performLinearAnimation(0, 0);
         // For each 2 pixels add or subtract 1 point
         this.setState({ pointsDelta: Math.round(-gestureState.dy / 2) });
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
+        this.refs.circularProgress.performLinearAnimation(100, 2000);
         let points = this.state.points + this.state.pointsDelta;
         console.log(Math.min(points, MAX_POINTS));
         this.setState({
@@ -77,8 +79,9 @@ export default class ProgressChart extends React.Component {
         <AnimatedCircularProgress
           size={100}
           width={25}
-          fill={fill}
+          fill={0}
           tintColor="#00e0ff"
+          ref="circularProgress"
           backgroundColor="#3d5875" />
 
         <Text style={[styles.pointsDelta, this.state.isMoving && styles.pointsDeltaActive]}>

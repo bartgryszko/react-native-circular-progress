@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes, Animated } from 'react-native';
+import { Animated, Easing, View, ViewPropTypes } from 'react-native';
 import CircularProgress from './CircularProgress';
 const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
@@ -41,6 +41,7 @@ export default class AnimatedCircularProgress extends React.Component {
 
     Animated.timing(this.state.chartFillAnimation, {
       toValue: toValue,
+      easing: Easing.linear,
       duration: duration
     }).start(onLinearAnimationComplete);
   }
