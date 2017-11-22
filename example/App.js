@@ -78,6 +78,7 @@ export default class Example extends React.Component {
           width={25}
           fill={0}
           tintColor="#00e0ff"
+          onAnimationComplete={() => console.log('onAnimationComplete')}
           ref="circularProgress"
           backgroundColor="#3d5875" />
 
