@@ -25,7 +25,7 @@ export default class CircularProgress extends React.Component {
 
     const fill = this.extractFill(this.props.fill);
     const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (360 * .9999) * fill / 100);
-
+    const offset = size - (width * 2);
     return (
       <View style={style}>
         <Surface
@@ -41,9 +41,20 @@ export default class CircularProgress extends React.Component {
                    strokeCap={linecap}/>
           </Group>
         </Surface>
-        {
-          children && children(fill)
-        }
+        {children && <View
+          style={{
+            position: 'absolute',
+            left: width,
+            top: width,
+            width: offset,
+            height: offset,
+            borderRadius: offset / 2,
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          {children(fill)}
+        </View>}
       </View>
     )
   }
