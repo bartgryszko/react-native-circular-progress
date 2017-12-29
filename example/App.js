@@ -54,7 +54,8 @@ export default class Example extends React.Component {
           width={3}
           fill={fill}
           tintColor="#00e0ff"
-          backgroundColor="#3d5875">
+          backgroundColor="#3d5875"
+        >
           {
             (fill) => (
               <Text style={styles.points}>
@@ -70,7 +71,7 @@ export default class Example extends React.Component {
           backgroundWidth={5}
           fill={fill}
           tintColor="#00e0ff"
-          backgroundColor="#3d5875"
+          backgroundColor="transparent"
         />
 
         <AnimatedCircularProgress
@@ -80,14 +81,15 @@ export default class Example extends React.Component {
           tintColor="#00e0ff"
           onAnimationComplete={() => console.log('onAnimationComplete')}
           ref="circularProgress"
-          backgroundColor="#3d5875" />
+          backgroundColor="#3d5875"
+        />
 
         <Text style={[styles.pointsDelta, this.state.isMoving && styles.pointsDeltaActive]}>
           { this.state.pointsDelta >= 0 && '+' }
           { this.state.pointsDelta }
         </Text>
       </View>
-  )
+    );
   }
 }
 

@@ -51,15 +51,22 @@ export default class CircularProgress extends React.Component {
       <View style={style}>
         <Surface
           width={size}
-          height={size}>
+          height={size}
+        >
           <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
-            <Shape d={backgroundPath}
-                   stroke={backgroundColor}
-                   strokeWidth={backgroundWidth != null ? backgroundWidth : width}/>
-            <Shape d={circlePath}
-                   stroke={tintColor}
-                   strokeWidth={width}
-                   strokeCap={linecap}/>
+            { backgroundColor !== 'transparent' && (
+              <Shape
+                d={backgroundPath}
+                stroke={backgroundColor}
+                strokeWidth={backgroundWidth != null ? backgroundWidth : width}
+              />
+            )}
+            <Shape
+              d={circlePath}
+              stroke={tintColor}
+              strokeWidth={width}
+              strokeCap={linecap}
+            />
           </Group>
         </Surface>
         {children && (
