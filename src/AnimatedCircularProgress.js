@@ -24,7 +24,7 @@ export default class AnimatedCircularProgress extends React.Component {
     this.animateFill();
     AppState.addEventListener('change', this.handleAppStateChange);
   }
-  
+
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppStateChange);
   }
@@ -86,6 +86,7 @@ export default class AnimatedCircularProgress extends React.Component {
 
 AnimatedCircularProgress.propTypes = {
   style: ViewPropTypes.style,
+  counterClockwise: PropTypes.bool,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number,
   prefill: PropTypes.number,
@@ -95,8 +96,8 @@ AnimatedCircularProgress.propTypes = {
   tension: PropTypes.number,
   friction: PropTypes.number,
   onAnimationComplete: PropTypes.func,
-  onLinearAnimationComplete: PropTypes.func,
-}
+  onLinearAnimationComplete: PropTypes.func
+};
 
 AnimatedCircularProgress.defaultProps = {
   tension: 7,
