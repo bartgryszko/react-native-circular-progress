@@ -1,11 +1,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes, Platform, ART } from 'react-native';
+import { View, ViewPropTypes, Platform, ART, AppState } from 'react-native';
 const { Surface, Shape, Path, Group } = ART;
 import MetricsPath from 'art/metrics/path';
 
 export default class CircularProgress extends React.Component {
+
+  state = {
+    // We need to track this to mitigate a bug with RN ART on Android.
+    // After being unlocked the <Surface> is not rendered.
+    // To mitigate this we change the key-prop to forcefully update the <Surface>
+    // It's horrible.
+    // See https://github.com/facebook/react-native/issues/17565
+    appState: AppState.currentState,
+  }
 
   circlePath(cx, cy, r, startDegree, endDegree) {
     let p = Path();
@@ -14,9 +23,13 @@ export default class CircularProgress extends React.Component {
     return p;
   }
 
-  extractFill(fill) {
-    return Math.min(100, Math.max(0, fill));
-  }
+  extractFill = fill => Math.min(100, Math.max(0, fill));
+
+  componentDidMount = () => AppState.addEventListener('change', this.handleAppStateChange);
+  
+  componentWillUnmount = () => AppState.removeEventListener('change', this.handleAppStateChange);
+
+  handleAppStateChange = nextAppState => this.setState({ appState: nextAppState });
 
   render() {
     const {
@@ -52,6 +65,7 @@ export default class CircularProgress extends React.Component {
         <Surface
           width={size}
           height={size}
+          key={this.state.appState}
         >
           <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
             { backgroundColor !== 'transparent' && (
