@@ -41,12 +41,13 @@ export default class CircularProgress extends React.Component {
       style,
       rotation,
       linecap,
+      arcSweepAngle,
       children
     } = this.props;
 
     const fill = this.extractFill(this.props.fill);
-    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * .9999);
-    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (360 * .9999) * fill / 100);
+    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * .9999);
+    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (arcSweepAngle * .9999) * fill / 100);
     const offset = size - (width * 2);
 
     const childContainerStyle = {
@@ -73,6 +74,7 @@ export default class CircularProgress extends React.Component {
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth != null ? backgroundWidth : width}
+                strokeCap={linecap}
               />
             )}
             <Shape
@@ -103,6 +105,7 @@ CircularProgress.propTypes = {
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
   linecap: PropTypes.string,
+  arcSweepAngle: PropTypes.number,
   children: PropTypes.func
 }
 
@@ -110,5 +113,6 @@ CircularProgress.defaultProps = {
   tintColor: 'black',
   backgroundColor: '#e4e4e4',
   rotation: 90,
-  linecap: 'butt'
+  linecap: 'butt',
+  arcSweepAngle: 360
 }
