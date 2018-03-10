@@ -71,7 +71,10 @@ export default class Example extends React.Component {
           backgroundWidth={5}
           fill={fill}
           tintColor="#00e0ff"
-          backgroundColor="transparent"
+          backgroundColor="#3d5875"
+          arcSweepAngle={240}
+          rotation={240}
+          linecap="round"
         />
 
         <AnimatedCircularProgress
@@ -82,6 +85,7 @@ export default class Example extends React.Component {
           onAnimationComplete={() => console.log('onAnimationComplete')}
           ref="circularProgress"
           backgroundColor="#3d5875"
+          arcSweepAngle={180}
         />
 
         <Text style={[styles.pointsDelta, this.state.isMoving && styles.pointsDeltaActive]}>
