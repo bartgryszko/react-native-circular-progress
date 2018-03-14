@@ -60,7 +60,7 @@ You can also define a function, that'll receive current progress and for example
 </AnimatedCircularProgress>
 ```
 
-Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `performLinearAnimation(toValue, duration)` function like so:
+Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `performTimingAnimation(toValue, duration, easing)` function like so:
 ```jsx
 <AnimatedCircularProgress
   ref='circularProgress'
@@ -68,7 +68,7 @@ Finally, you can manually trigger a duration-based timing animation by putting a
 />
 ```
 ```javascript
-this.refs.circularProgress.performLinearAnimation(100, 8000); // Will fill the progress bar linearly in 8 seconds
+this.refs.circularProgress.performTimingAnimation(100, 8000, Easing.quad); // Will fill the progress bar linearly in 8 seconds
 ```
 
 ## Configuration
