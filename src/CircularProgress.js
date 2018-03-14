@@ -59,7 +59,7 @@ export default class CircularProgress extends React.Component {
       borderRadius: offset / 2,
       alignItems: 'center',
       justifyContent: 'center'
-    }
+    };
 
     return (
       <View style={style}>
@@ -67,6 +67,7 @@ export default class CircularProgress extends React.Component {
           width={size}
           height={size}
           key={this.state.appState}
+          style={{ backgroundColor: 'transparent' }}
         >
           <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
             { backgroundColor !== 'transparent' && (
