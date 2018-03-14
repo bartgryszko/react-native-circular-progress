@@ -58,8 +58,7 @@ export default class CircularProgress extends React.Component {
       height: offset,
       borderRadius: offset / 2,
       alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'transparent'
+      justifyContent: 'center'
     };
 
     return (
