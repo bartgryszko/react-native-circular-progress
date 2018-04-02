@@ -40,7 +40,7 @@ export default class CircularProgress extends React.Component {
       backgroundColor,
       style,
       rotation,
-      linecap,
+      lineCap,
       arcSweepAngle,
       children
     } = this.props;
@@ -75,14 +75,14 @@ export default class CircularProgress extends React.Component {
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
-                strokeCap={linecap}
+                strokeCap={lineCap}
               />
             )}
             <Shape
               d={circlePath}
               stroke={tintColor}
               strokeWidth={width}
-              strokeCap={linecap}
+              strokeCap={lineCap}
             />
           </Group>
         </Surface>
@@ -105,7 +105,7 @@ CircularProgress.propTypes = {
   tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
-  linecap: PropTypes.string,
+  lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
   children: PropTypes.func
 }
@@ -113,6 +113,6 @@ CircularProgress.propTypes = {
 CircularProgress.defaultProps = {
   tintColor: 'black',
   rotation: 90,
-  linecap: 'butt',
+  lineCap: 'butt',
   arcSweepAngle: 360
 }

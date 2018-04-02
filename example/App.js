@@ -74,7 +74,7 @@ export default class Example extends React.Component {
           backgroundColor="#3d5875"
           arcSweepAngle={240}
           rotation={240}
-          linecap="round"
+          lineCap="round"
         />
 
         <AnimatedCircularProgress
