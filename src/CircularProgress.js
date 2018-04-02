@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ViewPropTypes, Platform, ART, AppState } from 'react-native';
 const { Surface, Shape, Path, Group } = ART;
-import MetricsPath from 'art/metrics/path';
 
 export default class CircularProgress extends React.Component {
 
@@ -19,17 +18,17 @@ export default class CircularProgress extends React.Component {
   circlePath(cx, cy, r, startDegree, endDegree) {
     let p = Path();
     p.path.push(0, cx + r, cy);
-    p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
+    p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, (endDegree * .9999) * Math.PI / 180, 1);
     return p;
   }
 
-  extractFill = fill => Math.min(100, Math.max(0, fill));
+  clampFill = fill => Math.min(100, Math.max(0, fill));
 
   componentDidMount = () => AppState.addEventListener('change', this.handleAppStateChange);
   
   componentWillUnmount = () => AppState.removeEventListener('change', this.handleAppStateChange);
 
-  handleAppStateChange = nextAppState => this.setState({ appState: nextAppState });
+  handleAppStateChange = appState => this.setState({ appState });
 
   render() {
     const {
@@ -42,12 +41,12 @@ export default class CircularProgress extends React.Component {
       rotation,
       lineCap,
       arcSweepAngle,
-      children
+      renderChild,
+      fill,
     } = this.props;
 
-    const fill = this.extractFill(this.props.fill);
-    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * .9999);
-    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (arcSweepAngle * .9999) * fill / 100);
+    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
+    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * this.clampFill(fill) / 100);
     const offset = size - (width * 2);
 
     const childContainerStyle = {
@@ -86,13 +85,13 @@ export default class CircularProgress extends React.Component {
             />
           </Group>
         </Surface>
-        {children && (
+        {renderChild && (
           <View style={childContainerStyle}>
-            {children(fill)}
+            {renderChild(fill)}
           </View>
         )}
       </View>
-    )
+    );
   }
 }
 
@@ -107,12 +106,12 @@ CircularProgress.propTypes = {
   rotation: PropTypes.number,
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
-  children: PropTypes.func
-}
+  renderChild: PropTypes.func
+};
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
   rotation: 90,
   lineCap: 'butt',
   arcSweepAngle: 360
-}
+};

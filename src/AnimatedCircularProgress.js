@@ -46,9 +46,9 @@ export default class AnimatedCircularProgress extends React.Component {
     const { onLinearAnimationComplete } = this.props;
 
     Animated.timing(this.state.chartFillAnimation, {
-      toValue: toValue,
-      easing: easing,
-      duration: duration
+      toValue,
+      easing,
+      duration,
     }).start(onLinearAnimationComplete);
   }
 
@@ -59,8 +59,8 @@ export default class AnimatedCircularProgress extends React.Component {
       <AnimatedProgress
         {...other}
         fill={this.state.chartFillAnimation}
-        />
-    )
+      />
+    );
   }
 }
 
@@ -76,7 +76,7 @@ AnimatedCircularProgress.propTypes = {
   friction: PropTypes.number,
   onAnimationComplete: PropTypes.func,
   onLinearAnimationComplete: PropTypes.func,
-}
+};
 
 AnimatedCircularProgress.defaultProps = {
   tension: 7,

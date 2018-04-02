@@ -55,15 +55,12 @@ export default class Example extends React.Component {
           fill={fill}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
-        >
-          {
-            (fill) => (
-              <Text style={styles.points}>
-                { Math.round(MAX_POINTS * fill / 100) }
-              </Text>
-            )
-          }
-        </AnimatedCircularProgress>
+          renderChild={(fill) => (
+            <Text style={styles.points}>
+              { Math.round(MAX_POINTS * fill / 100) }
+            </Text>
+          )}
+        />
 
         <AnimatedCircularProgress
           size={120}
