@@ -1,22 +1,34 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes, Platform, ART } from 'react-native';
+import { View, ViewPropTypes, Platform, ART, AppState } from 'react-native';
 const { Surface, Shape, Path, Group } = ART;
-import MetricsPath from 'art/metrics/path';
 
 export default class CircularProgress extends React.Component {
+
+  state = {
+    // We need to track this to mitigate a bug with RN ART on Android.
+    // After being unlocked the <Surface> is not rendered.
+    // To mitigate this we change the key-prop to forcefully update the <Surface>
+    // It's horrible.
+    // See https://github.com/facebook/react-native/issues/17565
+    appState: AppState.currentState,
+  }
 
   circlePath(cx, cy, r, startDegree, endDegree) {
     let p = Path();
     p.path.push(0, cx + r, cy);
-    p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, endDegree * Math.PI / 180, 1);
+    p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, (endDegree * .9999) * Math.PI / 180, 1);
     return p;
   }
 
-  extractFill(fill) {
-    return Math.min(100, Math.max(0, fill));
-  }
+  clampFill = fill => Math.min(100, Math.max(0, fill));
+
+  componentDidMount = () => AppState.addEventListener('change', this.handleAppStateChange);
+  
+  componentWillUnmount = () => AppState.removeEventListener('change', this.handleAppStateChange);
+
+  handleAppStateChange = appState => this.setState({ appState });
 
   render() {
     const {
@@ -27,13 +39,14 @@ export default class CircularProgress extends React.Component {
       backgroundColor,
       style,
       rotation,
-      linecap,
-      children
+      lineCap,
+      arcSweepAngle,
+      renderChild,
+      fill,
     } = this.props;
 
-    const fill = this.extractFill(this.props.fill);
-    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, 360 * .9999);
-    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, (360 * .9999) * fill / 100);
+    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
+    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * this.clampFill(fill) / 100);
     const offset = size - (width * 2);
 
     const childContainerStyle = {
@@ -45,37 +58,40 @@ export default class CircularProgress extends React.Component {
       borderRadius: offset / 2,
       alignItems: 'center',
       justifyContent: 'center'
-    }
+    };
 
     return (
       <View style={style}>
         <Surface
           width={size}
           height={size}
+          key={this.state.appState}
+          style={{ backgroundColor: 'transparent' }}
         >
           <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
-            { backgroundColor !== 'transparent' && (
+            { backgroundColor && (
               <Shape
                 d={backgroundPath}
                 stroke={backgroundColor}
-                strokeWidth={backgroundWidth != null ? backgroundWidth : width}
+                strokeWidth={backgroundWidth || width}
+                strokeCap={lineCap}
               />
             )}
             <Shape
               d={circlePath}
               stroke={tintColor}
               strokeWidth={width}
-              strokeCap={linecap}
+              strokeCap={lineCap}
             />
           </Group>
         </Surface>
-        {children && (
+        {renderChild && (
           <View style={childContainerStyle}>
-            {children(fill)}
+            {renderChild(fill)}
           </View>
         )}
       </View>
-    )
+    );
   }
 }
 
@@ -88,13 +104,14 @@ CircularProgress.propTypes = {
   tintColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
-  linecap: PropTypes.string,
-  children: PropTypes.func
-}
+  lineCap: PropTypes.string,
+  arcSweepAngle: PropTypes.number,
+  renderChild: PropTypes.func
+};
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
-  backgroundColor: '#e4e4e4',
   rotation: 90,
-  linecap: 'butt'
-}
+  lineCap: 'butt',
+  arcSweepAngle: 360
+};
