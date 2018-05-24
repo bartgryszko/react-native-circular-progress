@@ -55,15 +55,12 @@ export default class Example extends React.Component {
           fill={fill}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
-        >
-          {
-            (fill) => (
-              <Text style={styles.points}>
-                { Math.round(MAX_POINTS * fill / 100) }
-              </Text>
-            )
-          }
-        </AnimatedCircularProgress>
+          renderChild={(fill) => (
+            <Text style={styles.points}>
+              { Math.round(MAX_POINTS * fill / 100) }
+            </Text>
+          )}
+        />
 
         <AnimatedCircularProgress
           size={120}
@@ -71,7 +68,10 @@ export default class Example extends React.Component {
           backgroundWidth={5}
           fill={fill}
           tintColor="#00e0ff"
-          backgroundColor="transparent"
+          backgroundColor="#3d5875"
+          arcSweepAngle={240}
+          rotation={240}
+          lineCap="round"
         />
 
         <AnimatedCircularProgress
@@ -82,6 +82,7 @@ export default class Example extends React.Component {
           onAnimationComplete={() => console.log('onAnimationComplete')}
           ref="circularProgress"
           backgroundColor="#3d5875"
+          arcSweepAngle={180}
         />
 
         <Text style={[styles.pointsDelta, this.state.isMoving && styles.pointsDeltaActive]}>
