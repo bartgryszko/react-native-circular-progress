@@ -24,15 +24,14 @@ export default class Example extends React.Component {
       },
 
       onPanResponderMove: (evt, gestureState) => {
-        this.refs.circularProgress.performLinearAnimation(0, 0);
+        this.refs.circularProgress.performTimingAnimation(0, 0);
         // For each 2 pixels add or subtract 1 point
         this.setState({ pointsDelta: Math.round(-gestureState.dy / 2) });
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        this.refs.circularProgress.performLinearAnimation(100, 2000);
+        this.refs.circularProgress.performTimingAnimation(100, 2000);
         let points = this.state.points + this.state.pointsDelta;
-        console.log(Math.min(points, MAX_POINTS));
         this.setState({
           isMoving: false,
           points: points > 0 ? Math.min(points, MAX_POINTS) : 0,
@@ -122,4 +121,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   }
 });
-
