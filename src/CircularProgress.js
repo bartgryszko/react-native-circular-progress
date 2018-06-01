@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes, Platform, ART, AppState } from 'react-native';
+import { View, ViewPropTypes, ART, AppState } from 'react-native';
 const { Surface, Shape, Path, Group } = ART;
 
 export default class CircularProgress extends React.Component {
@@ -16,16 +16,96 @@ export default class CircularProgress extends React.Component {
   }
 
   circlePath(cx, cy, r, startDegree, endDegree) {
-    let p = Path();
-    p.path.push(0, cx + r, cy);
+    const p = Path();
+    p.moveTo(cx + r, cy);
     p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, (endDegree * .9999) * Math.PI / 180, 1);
     return p;
+  }
+
+  pointPath(circlePath, cx, cy, r, width, startDegree, endDegree) {
+    const {x1, y1, x2, y2, x3, y3} = this.getPointPoints(circlePath, cx, cy, r, width, startDegree, endDegree);
+
+    const p = Path();
+    p.moveTo(x1, y1);
+    p.lineTo(x2, y2);
+    p.lineTo(x3, y3);
+    p.lineTo(x1, y1);
+    return p;
+  }
+
+  getPointPoints(circlePath, cx, cy, r, width, startDegree, endDegree) {
+    // get the ending point of the circle
+    let aDeg = endDegree - startDegree;
+    if (aDeg >= 360) {
+      aDeg -= 360;
+    }
+    const aRad = aDeg * Math.PI / 180;
+    const px = cx + (r * Math.cos(aRad));
+    const py = cy + (r * Math.sin(aRad));
+
+    // get the radius line between the center of the circle and the ending point
+    const {rise, run} = this.getSlope(cx, cy, px, py);
+    const slope = rise / (run || 0.0000000001);
+    const b = -(slope*cx) + cy;
+
+    // get the two points half the width away from the center along the radius line
+    const bump = this.getXBump((width - 2) / 2, slope);
+    const x1 = px + bump;
+    const x2 = px - bump;
+    const y1 = (slope*x1) + b;
+    const y2 = (slope*x2) + b;
+
+    const {tx, ty} = this.getTriangleTip(x1, y1, x2, y2, rise, run, width/2, aDeg <= 180);
+    const x3 = tx, y3 = ty;
+
+    return {x1, y1, x2, y2, x3, y3};
+  }
+
+  // for getting a point a certain distance away
+  // x = x_0 +- getXBump(distance, slope);
+  getXBump(distance, slope) {
+    return distance / (Math.sqrt(1 + Math.pow(slope, 2)));
+  }
+
+  getTriangleTip(x1, y1, x2, y2, rise, run, height, up) {
+    // midpoint between the base points
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2;
+
+    // perpendicular line
+    const pslope = -1 * run / (rise || 0.0000000001);
+    const b = -(pslope*mx) + my;
+
+    // point distance away
+    let bump = this.getXBump(height, pslope);
+    if (up) {
+      bump = -1 * bump;
+    }
+    const tx = mx + bump;
+    const ty = (pslope*tx) + b;
+
+    return {tx, ty};
+  }
+
+  getSlope(cx, cy, px, py) {
+    const rise = cy - py;
+    const run = cx - px;
+    const slope = this.reduce(rise, run);
+    return {rise: slope[0], run: slope[1]};
+  }
+
+  reduce(numerator,denominator){
+    const getgcd = (a,b) => {
+      return b ? getgcd(b, a%b) : a;
+    };
+    const gcd = getgcd(numerator,denominator);
+    return [numerator/gcd, denominator/gcd];
   }
 
   clampFill = fill => Math.min(100, Math.max(0, fill));
 
   componentDidMount = () => AppState.addEventListener('change', this.handleAppStateChange);
-  
+
   componentWillUnmount = () => AppState.removeEventListener('change', this.handleAppStateChange);
 
   handleAppStateChange = appState => this.setState({ appState });
@@ -45,8 +125,11 @@ export default class CircularProgress extends React.Component {
       fill,
     } = this.props;
 
-    const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
-    const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * this.clampFill(fill) / 100);
+    const halfSize = size / 2;
+    const angleFill = arcSweepAngle * this.clampFill(fill) / 100;
+    const backgroundPath = this.circlePath(halfSize, halfSize, halfSize - width / 2, 0, arcSweepAngle);
+    const circlePath = this.circlePath(halfSize, halfSize, halfSize - width / 2, 0, angleFill);
+    const pointPath = lineCap == 'point' && this.pointPath(circlePath, halfSize, halfSize, halfSize - width / 2, width, 0, angleFill);
     const offset = size - (width * 2);
 
     const childContainerStyle = {
@@ -81,8 +164,16 @@ export default class CircularProgress extends React.Component {
               d={circlePath}
               stroke={tintColor}
               strokeWidth={width}
-              strokeCap={lineCap}
+              strokeCap={lineCap == 'point' ? 'butt' : lineCap}
             />
+          { lineCap == 'point' && (
+            <Shape
+              d={pointPath}
+              fill={tintColor}
+              stroke={tintColor}
+              strokeWidth={1}
+            />
+          )}
           </Group>
         </Surface>
         {renderChild && (
