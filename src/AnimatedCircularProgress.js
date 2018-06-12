@@ -49,7 +49,7 @@ export default class AnimatedCircularProgress extends React.Component {
 
     Animated.timing(this.state.chartFillAnimation, {
       toValue: toValue,
-      easing: Easing.linear,
+      easing: easing,
       duration: duration
     }).start(onLinearAnimationComplete);
   }
