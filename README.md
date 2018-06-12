@@ -48,6 +48,7 @@ You can also define a function, that'll receive current progress and for example
   size={200}
   width={3}
   fill={this.state.fill}
+  duration={4500}
   tintColor="#00e0ff"
   backgroundColor="#3d5875">
   {
@@ -59,7 +60,23 @@ You can also define a function, that'll receive current progress and for example
   }
 </AnimatedCircularProgress>
 ```
-
+```jsx
+<AnimatedCircularProgress
+  size={200}
+  width={3}
+  fill={100}
+  duration={4500}
+  tintColor="#00e0ff"
+  backgroundColor="#3d5875">
+  {
+    (fill) => (
+      <Image
+             source={require('../../images/coros_symbol.png')}
+       />
+    )
+  }
+</AnimatedCircularProgress>
+```
 Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `performTimingAnimation(toValue, duration, easing)` function like so:
 ```jsx
 <AnimatedCircularProgress
