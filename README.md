@@ -71,7 +71,7 @@ You can also define a function, that'll receive current progress and for example
   {
     (fill) => (
       <Image
-             source={require('../../images/coros_symbol.png')}
+             source={require('../../images/kool.png')}
        />
     )
   }
