@@ -21,13 +21,13 @@ export default class AnimatedCircularProgress extends React.Component {
 
   componentDidMount() {
     this.animateFill();
-    this.performLinearAnimation(this.props.fill,this.props.duration);
+    this.performTimingAnimation(this.props.fill,this.props.duration);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.fill !== this.props.fill) {
       this.animateFill();
-      this.performLinearAnimation(this.props.fill,this.props.duration);
+      this.performTimingAnimation(this.props.fill,this.props.duration);
     }
   }
 
