@@ -33,12 +33,6 @@ export default class CircularProgress extends React.Component {
 
   clampFill = fill => Math.min(100, Math.max(0, fill));
 
-  componentDidMount = () => AppState.addEventListener('change', this.handleAppStateChange);
-  
-  componentWillUnmount = () => AppState.removeEventListener('change', this.handleAppStateChange);
-
-  handleAppStateChange = appState => this.setState({ appState });
-
   render() {
     const {
       size,
