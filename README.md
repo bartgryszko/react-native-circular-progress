@@ -75,7 +75,7 @@ this.refs.circularProgress.performTimingAnimation(100, 8000, Easing.quad); // Wi
 
 You can configure the passing by following props:
 
-- **size** – width and height of the circle
+- **size** – width and height of the circle - could be `number` or `object` if you use `Aniamted.Value()`
 - **width** - thickness of the lines
 - **backgroundWidth** - thickness of the background line
 - **fill** - current, percentage fill (from 0 to 100)
