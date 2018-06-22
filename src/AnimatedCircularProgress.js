@@ -21,11 +21,13 @@ export default class AnimatedCircularProgress extends React.Component {
 
   componentDidMount() {
     this.animateFill();
+    this.performTimingAnimation(this.props.fill,this.props.duration);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.fill !== this.props.fill) {
       this.animateFill();
+      this.performTimingAnimation(this.props.fill,this.props.duration);
     }
   }
 
@@ -46,9 +48,9 @@ export default class AnimatedCircularProgress extends React.Component {
     const { onLinearAnimationComplete } = this.props;
 
     Animated.timing(this.state.chartFillAnimation, {
-      toValue,
-      easing,
-      duration,
+      toValue: toValue,
+      easing: easing,
+      duration: duration
     }).start(onLinearAnimationComplete);
   }
 
@@ -59,8 +61,8 @@ export default class AnimatedCircularProgress extends React.Component {
       <AnimatedProgress
         {...other}
         fill={this.state.chartFillAnimation}
-      />
-    );
+        />
+    )
   }
 }
 
@@ -71,6 +73,7 @@ AnimatedCircularProgress.propTypes = {
     PropTypes.object,
   ]).isRequired,
   fill: PropTypes.number,
+  duration: PropTypes.number,
   prefill: PropTypes.number,
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -79,7 +82,7 @@ AnimatedCircularProgress.propTypes = {
   friction: PropTypes.number,
   onAnimationComplete: PropTypes.func,
   onLinearAnimationComplete: PropTypes.func,
-};
+}
 
 AnimatedCircularProgress.defaultProps = {
   tension: 7,
