@@ -62,6 +62,6 @@ AnimatedCircularProgress.propTypes = {
 
 AnimatedCircularProgress.defaultProps = {
   duration: 500,
-  easing: Easing.ease,
+  easing: Easing.elastic(1),
   prefill: 0,
 };

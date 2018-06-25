@@ -24,13 +24,13 @@ export default class Example extends React.Component {
       },
 
       onPanResponderMove: (evt, gestureState) => {
-        this.refs.circularProgress.performLinearAnimation(0, 0);
+        this.refs.circularProgress.animate(0, 0);
         // For each 2 pixels add or subtract 1 point
         this.setState({ pointsDelta: Math.round(-gestureState.dy / 2) });
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        this.refs.circularProgress.performLinearAnimation(100, 2000);
+        this.refs.circularProgress.animate(100, 2000);
         let points = this.state.points + this.state.pointsDelta;
         console.log(Math.min(points, MAX_POINTS));
         this.setState({
@@ -55,12 +55,13 @@ export default class Example extends React.Component {
           fill={fill}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
-          renderChild={(fill) => (
+        >
+          {(fill) => (
             <Text style={styles.points}>
               { Math.round(MAX_POINTS * fill / 100) }
             </Text>
           )}
-        />
+        </AnimatedCircularProgress>
 
         <AnimatedCircularProgress
           size={120}

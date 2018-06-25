@@ -83,7 +83,7 @@ export default class CircularProgress extends React.PureComponent {
         </Svg>
         {children && (
           <View style={childContainerStyle}>
-            {typeof children === 'function' ? children(fill) : children}
+            {children(fill)}
           </View>
         )}
       </View>
@@ -102,10 +102,7 @@ CircularProgress.propTypes = {
   rotation: PropTypes.number,
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
-  children: PropTypes.oneOf([
-    propTypes.func,
-    PropTypes.node,
-  ]),
+  children: PropTypes.func,
 };
 
 CircularProgress.defaultProps = {
