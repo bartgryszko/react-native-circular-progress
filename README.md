@@ -1,7 +1,6 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 [![Version](https://img.shields.io/npm/v/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
 [![npm](https://img.shields.io/npm/dt/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
-[![Twitter Follow](https://img.shields.io/twitter/follow/bgryszko.svg?style=social&label=Follow)](https://twitter.com/bgryszko)
 
 # react-native-circular-progress
 
@@ -17,13 +16,11 @@ React Native component for creating animated, circular progress with ReactART. U
 
 ## Installation
 
-1. Install library `npm i --save react-native-circular-progress`
-2. As Expo user you are good to go right now, or alternatively install ART:
-3. Link ART library to your ReactNative project ([how to link a library?](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)). You'll find ReactART library in `node_modules/react-native/Libraries/ART/ART.xcodeproj`
+`npm i --save react-native-circular-progress`
 
 ## Usage
 
-Import CircularProgress or AnimatedCircularProgress.
+Import CircularProgress or AnimatedCircularProgress:
 
 ```js
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -103,9 +100,6 @@ yarn start
 ## Author
 
 Bartosz Gryszko (b@gryszko.com)
-
-For new components and updates [follow me on twitter](http://twitter.com/bgryszko).
-
 
 ## License
 
