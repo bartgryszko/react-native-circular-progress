@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { View, ViewPropTypes } from 'react-native';
 import { Svg, Path, G } from 'react-native-svg';
 
-export default class CircularProgress extends React.Component {
-
-  // eliminate unecessary re-renders
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    if (this.props === nextProps) return false;
-    return true;
-  }
-
+export default class CircularProgress extends React.PureComponent {
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
     return {
