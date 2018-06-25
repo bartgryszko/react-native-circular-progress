@@ -1,25 +1,26 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes, ART, AppState } from 'react-native';
-const { Surface, Shape, Path, Group } = ART;
+import { View, ViewPropTypes } from 'react-native';
+import { Svg, Path, G } from 'react-native-svg';
 
-export default class CircularProgress extends React.Component {
-
-  state = {
-    // We need to track this to mitigate a bug with RN ART on Android.
-    // After being unlocked the <Surface> is not rendered.
-    // To mitigate this we change the key-prop to forcefully update the <Surface>
-    // It's horrible.
-    // See https://github.com/facebook/react-native/issues/17565
-    appState: AppState.currentState,
+export default class CircularProgress extends React.PureComponent {
+  polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+    return {
+        x: centerX + (radius * Math.cos(angleInRadians)),
+        y: centerY + (radius * Math.sin(angleInRadians))
+    };
   }
 
-  circlePath(cx, cy, r, startDegree, endDegree) {
-    const p = Path();
-    p.moveTo(cx + r, cy);
-    p.path.push(4, cx, cy, r, startDegree * Math.PI / 180, (endDegree * .9999) * Math.PI / 180, 1);
-    return p;
+  circlePath(x, y, radius, startAngle, endAngle){
+    var start = this.polarToCartesian(x, y, radius, endAngle * 0.9999);
+    var end = this.polarToCartesian(x, y, radius, startAngle);
+    var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+    var d = [
+        'M', start.x, start.y,
+        'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y
+    ];
+    return d.join(' ');
   }
 
   pointPath(circlePath, cx, cy, r, width, startDegree, endDegree) {
@@ -104,12 +105,6 @@ export default class CircularProgress extends React.Component {
 
   clampFill = fill => Math.min(100, Math.max(0, fill));
 
-  componentDidMount = () => AppState.addEventListener('change', this.handleAppStateChange);
-
-  componentWillUnmount = () => AppState.removeEventListener('change', this.handleAppStateChange);
-
-  handleAppStateChange = appState => this.setState({ appState });
-
   render() {
     const {
       size,
@@ -121,8 +116,8 @@ export default class CircularProgress extends React.Component {
       rotation,
       lineCap,
       arcSweepAngle,
-      renderChild,
       fill,
+      children,
     } = this.props;
 
     const halfSize = size / 2;
@@ -145,40 +140,33 @@ export default class CircularProgress extends React.Component {
 
     return (
       <View style={style}>
-        <Surface
+        <Svg
           width={size}
           height={size}
-          key={this.state.appState}
           style={{ backgroundColor: 'transparent' }}
         >
-          <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
+          <G rotation={rotation} originX={size/2} originY={size/2}>
             { backgroundColor && (
-              <Shape
+              <Path
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
                 strokeCap={lineCap}
+                fill="transparent"
               />
             )}
-            <Shape
+            <Path
               d={circlePath}
               stroke={tintColor}
               strokeWidth={width}
-              strokeCap={lineCap == 'point' ? 'butt' : lineCap}
+              strokeCap={lineCap}
+              fill="transparent"
             />
-          { lineCap == 'point' && (
-            <Shape
-              d={pointPath}
-              fill={tintColor}
-              stroke={tintColor}
-              strokeWidth={1}
-            />
-          )}
-          </Group>
-        </Surface>
-        {renderChild && (
+          </G>
+        </Svg>
+        {children && (
           <View style={childContainerStyle}>
-            {renderChild(fill)}
+            {children(fill)}
           </View>
         )}
       </View>
@@ -197,7 +185,7 @@ CircularProgress.propTypes = {
   rotation: PropTypes.number,
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
-  renderChild: PropTypes.func
+  children: PropTypes.func,
 };
 
 CircularProgress.defaultProps = {
