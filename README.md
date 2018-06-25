@@ -4,12 +4,7 @@
 
 # react-native-circular-progress
 
-React Native component for creating animated, circular progress with ReactART. Useful for displaying users points for example. **Works on iOS & Android.**
-
----
-**Looking for a circular slider?** Take a look at my other component – [react-native-circular-slider](https://github.com/bgryszko/react-native-circular-slider) :alarm_clock:
-
-----
+React Native component for creating animated, circular progress. Useful for displaying users points for example. **Works on iOS & Android.**
 
 ## Example app
 ![image](screenshot.gif)
@@ -57,7 +52,7 @@ You can also define a function, that'll receive current progress and for example
 </AnimatedCircularProgress>
 ```
 
-Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `performTimingAnimation(toValue, duration, easing)` function like so:
+Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `animate(toValue, duration, easing)` function like so:
 ```jsx
 <AnimatedCircularProgress
   ref='circularProgress'
@@ -65,7 +60,7 @@ Finally, you can manually trigger a duration-based timing animation by putting a
 />
 ```
 ```javascript
-this.refs.circularProgress.performTimingAnimation(100, 8000, Easing.quad); // Will fill the progress bar linearly in 8 seconds
+this.refs.circularProgress.animate(100, 8000, Easing.quad); // Will fill the progress bar linearly in 8 seconds
 ```
 
 ## Configuration
@@ -80,13 +75,12 @@ You can configure the passing by following props:
 - **tintColor** - color of the progress line
 - **backgroundColor** - color of the background for the progress line. If unspecified, no background will be rendered
 - **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
-- **tension** - the tension value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
-- **friction** - the friction value for the spring animation (see [here](https://facebook.github.io/react-native/docs/animations.html#core-api))
+- **duration** - duration of the animation
+- **easing** - animation easing function
 - **lineCap** - the shape to be used at the ends of the circle. Possible values: butt (default), round or square. (see [here](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-linecap))
 - **arcSweepAngle** - the angle that you want your arc to sweep in the case where you don't want a full circle. Default is 360.
 - **children(fill)** - you can pass function as a child to receive current fill
-- **onAnimationComplete** - you can pass a callback function that will be invoked when animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
-- **onLinearAnimationComplete** - you can pass a callback function that will be invoked when linear animation is complete. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
+- **onAnimationComplete** - you can pass a callback function that will be invoked when animation  completes. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
 
 ## Running example app
 
