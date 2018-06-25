@@ -36,8 +36,8 @@ export default class CircularProgress extends React.PureComponent {
       rotation,
       lineCap,
       arcSweepAngle,
-      renderChild,
       fill,
+      children,
     } = this.props;
 
     const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
@@ -81,9 +81,9 @@ export default class CircularProgress extends React.PureComponent {
             />
           </G>
         </Svg>
-        {renderChild && (
+        {children && (
           <View style={childContainerStyle}>
-            {renderChild(fill)}
+            {typeof children === 'function' ? children(fill) : children}
           </View>
         )}
       </View>
@@ -102,7 +102,10 @@ CircularProgress.propTypes = {
   rotation: PropTypes.number,
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
-  renderChild: PropTypes.func
+  children: PropTypes.oneOf([
+    propTypes.func,
+    PropTypes.node,
+  ]),
 };
 
 CircularProgress.defaultProps = {
