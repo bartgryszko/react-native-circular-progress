@@ -13,8 +13,7 @@
     "react-component",
     "progress",
     "chart",
-    "react-art",
-    "art"
+    "react-svg"
   ],
   "author": {
     "name": "Bart Gryszko",
@@ -26,12 +25,11 @@
   },
   "homepage": "https://github.com/bgryszko/react-native-circular-progress",
   "dependencies": {
-    "art": "^0.10.1",
     "prop-types": "^15.6.0",
     "react-native-svg": "^6.3.1"
   },
   "peerDependencies": {
-    "react": ">= 15 || ~16.0.0-0",
-    "react-native": ">=0.39"
+    "react": ">=16.0.0",
+    "react-native": ">=0.39.0"
   }
 }
