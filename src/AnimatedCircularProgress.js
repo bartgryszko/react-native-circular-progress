@@ -10,46 +10,34 @@ import {
 import CircularProgress from './CircularProgress';
 const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
-export default class AnimatedCircularProgress extends React.Component {
-
+export default class AnimatedCircularProgress extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      chartFillAnimation: new Animated.Value(props.prefill || 0)
+      fillAnimation: new Animated.Value(props.prefill)
     }
   }
 
   componentDidMount() {
-    this.animateFill();
+    this.animate();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.fill !== this.props.fill) {
-      this.animateFill();
+      this.animate();
     }
   }
 
-  animateFill() {
-    const { tension, friction, onAnimationComplete } = this.props;
+  animate(toVal, dur, ease) {
+    const toValue = toVal || this.props.fill;
+    const duration = dur || this.props.duration;
+    const easing = ease || this.props.easing;
 
-    Animated.spring(
-      this.state.chartFillAnimation,
-      {
-        toValue: this.props.fill,
-        tension,
-        friction
-      }
-    ).start(onAnimationComplete);
-  }
-
-  performTimingAnimation(toValue, duration, easing = Easing.linear) {
-    const { onLinearAnimationComplete } = this.props;
-
-    Animated.timing(this.state.chartFillAnimation, {
+    Animated.timing(this.state.fillAnimation, {
       toValue,
       easing,
       duration,
-    }).start(onLinearAnimationComplete);
+    }).start(this.props.onAnimationComplete);
   }
 
   render() {
@@ -58,27 +46,22 @@ export default class AnimatedCircularProgress extends React.Component {
     return (
       <AnimatedProgress
         {...other}
-        fill={this.state.chartFillAnimation}
+        fill={this.state.fillAnimation}
       />
     );
   }
 }
 
 AnimatedCircularProgress.propTypes = {
-  style: ViewPropTypes.style,
-  size: PropTypes.number.isRequired,
-  fill: PropTypes.number,
+  ...CircularProgress.propTypes,
   prefill: PropTypes.number,
-  width: PropTypes.number.isRequired,
-  tintColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  backgroundColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  tension: PropTypes.number,
-  friction: PropTypes.number,
+  duration: PropTypes.number,
+  easing: PropTypes.func,
   onAnimationComplete: PropTypes.func,
-  onLinearAnimationComplete: PropTypes.func,
 };
 
 AnimatedCircularProgress.defaultProps = {
-  tension: 7,
-  friction: 10
+  duration: 500,
+  easing: Easing.elastic(1),
+  prefill: 0,
 };
