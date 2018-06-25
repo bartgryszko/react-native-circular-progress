@@ -1,8 +1,7 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ViewPropTypes } from 'react-native';
-import   { Svg, Path, G } from 'react-native-svg';
+import { Svg, Path, G } from 'react-native-svg';
 
 export default class CircularProgress extends React.Component {
 
@@ -13,7 +12,7 @@ export default class CircularProgress extends React.Component {
   }
 
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-    var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+    var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
     return {
         x: centerX + (radius * Math.cos(angleInRadians)),
         y: centerY + (radius * Math.sin(angleInRadians))
@@ -23,12 +22,12 @@ export default class CircularProgress extends React.Component {
   circlePath(x, y, radius, startAngle, endAngle){
     var start = this.polarToCartesian(x, y, radius, endAngle * 0.9999);
     var end = this.polarToCartesian(x, y, radius, startAngle);
-    var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+    var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
     var d = [
-        "M", start.x, start.y,
-        "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-    ].join(" ");  
-    return d;
+        'M', start.x, start.y,
+        'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y
+    ];  
+    return d.join(' ');
   }
 
   clampFill = fill => Math.min(100, Math.max(0, fill));
