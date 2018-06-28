@@ -33,7 +33,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
 
-    Animated.timing(this.state.fillAnimation, {
+    return Animated.timing(this.state.fillAnimation, {
       toValue,
       easing,
       duration,
@@ -62,6 +62,6 @@ AnimatedCircularProgress.propTypes = {
 
 AnimatedCircularProgress.defaultProps = {
   duration: 500,
-  easing: Easing.elastic(1),
+  easing: Easing.out(Easing.ease),
   prefill: 0,
 };
