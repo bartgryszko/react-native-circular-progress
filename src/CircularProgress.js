@@ -19,7 +19,7 @@ export default class CircularProgress extends React.PureComponent {
     var d = [
         'M', start.x, start.y,
         'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y
-    ];  
+    ];
     return d.join(' ');
   }
 
@@ -68,7 +68,7 @@ export default class CircularProgress extends React.PureComponent {
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
-                strokeCap={lineCap}
+                strokeLinecap={lineCap}
                 fill="transparent"
               />
             )}
@@ -76,7 +76,7 @@ export default class CircularProgress extends React.PureComponent {
               d={circlePath}
               stroke={tintColor}
               strokeWidth={width}
-              strokeCap={lineCap}
+              strokeLinecap={lineCap}
               fill="transparent"
             />
           </G>
