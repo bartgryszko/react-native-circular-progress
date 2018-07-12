@@ -11,7 +11,13 @@ React Native component for creating animated, circular progress. Useful for disp
 
 ## Installation
 
-`npm i --save react-native-circular-progress`
+1. Install this component and `react-native-svg`:
+
+`npm i --save react-native-circular-progress react-native-svg`
+
+2. Link native code for SVG:
+
+`react-native link react-native-svg`
 
 ## Usage
 
