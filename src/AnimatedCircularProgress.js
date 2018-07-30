@@ -27,6 +27,9 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     if (prevProps.fill !== this.props.fill) {
       this.animate();
     }
+    if (prevProps.prefill !== this.props.prefill) {
+      this.state.fillAnimation.setValue(this.props.prefill);
+    }
   }
 
   animate(toVal, dur, ease) {
