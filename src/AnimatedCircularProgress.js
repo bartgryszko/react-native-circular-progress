@@ -48,6 +48,10 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     return this.timingFunction;
   }
   
+  setAnimatedValue(value) {
+    this.state.fillAnimation.setValue(value);
+  }
+  
   stopAnimation() {
     if(this.timingFunction) this.timingFunction.stop();
   }
