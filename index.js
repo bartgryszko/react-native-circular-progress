@@ -1,2 +1,4 @@
-export { default as CircularProgress } from './src/CircularProgress';
-export { default as AnimatedCircularProgress } from './src/AnimatedCircularProgress';
+import CircularProgress from './src/CircularProgress';
+import AnimatedCircularProgress from './src/AnimatedCircularProgress';
+
+export { CirculartProgress, AnimatedCircularProgress }
