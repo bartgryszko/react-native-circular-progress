@@ -83,18 +83,18 @@ You can configure the passing by following props:
 - **tintColor** - color of the progress line
 - **backgroundColor** - color of the background for the progress line. If unspecified, no background will be rendered
 - **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
-- **duration** - duration of the animation
+- **duration** - duration of the animation in milliseconds. Default is 500ms
 - **easing** - animation easing function
 - **lineCap** - the shape to be used at the ends of the circle. Possible values: butt (default), round or square. (see [here](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-linecap))
 - **arcSweepAngle** - the angle that you want your arc to sweep in the case where you don't want a full circle. Default is 360.
 - **children(fill)** - you can pass function as a child to receive current fill
-- **onAnimationComplete** - you can pass a callback function that will be invoked when animation  completes. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
+- **onAnimationComplete** - you can pass a callback function that will be invoked when animation completes. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
 
 ## Running example app
 
 ```sh
 git clone https://github.com/bgryszko/react-native-circular-progress.git
-cd  react-native-circular-progress/example
+cd react-native-circular-progress/example
 yarn
 yarn start
 ```
