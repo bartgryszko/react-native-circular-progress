@@ -28,7 +28,7 @@ export default class App extends React.Component {
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        this.refs.circularProgress.animate(100, 2000);
+        this.refs.circularProgress.animate(100, 3000);
         let points = this.state.points + this.state.pointsDelta;
         console.log(Math.min(points, MAX_POINTS));
         this.setState({

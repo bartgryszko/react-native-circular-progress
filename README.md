@@ -1,19 +1,21 @@
+# react-native-circular-progress
+
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 [![Version](https://img.shields.io/npm/v/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
 [![npm](https://img.shields.io/npm/dt/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
 
-# react-native-circular-progress
 
 React Native component for creating animated, circular progress. Useful for displaying users points for example. **Works on iOS & Android.**
 
 ## Example app
+
 ![image](screenshot.gif)
 
 ## Installation
 
 1. Install this component and `react-native-svg`:
 
-`npm i --save react-native-circular-progress react-native-svg`
+    `npm i --save react-native-circular-progress react-native-svg`
 
 2. Link native code for SVG:
 
@@ -65,6 +67,7 @@ Finally, you can manually trigger a duration-based timing animation by putting a
   ...
 />
 ```
+
 ```javascript
 this.circularProgress.animate(100, 8000, Easing.quad); // Will fill the progress bar linearly in 8 seconds
 ```
@@ -89,8 +92,9 @@ You can configure the passing by following props:
 - **arcSweepAngle** - the angle that you want your arc to sweep in the case where you don't want a full circle. Default is 360.
 - **children(fill)** - you can pass function as a child to receive current fill
 - **onAnimationComplete** - you can pass a callback function that will be invoked when animation completes. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
+- **reAnimate(prefill, toVal, dur, ease)** - Run the animation again
 
-## Running example app
+## Running example app (Expo)
 
 ```sh
 git clone https://github.com/bgryszko/react-native-circular-progress.git
@@ -99,13 +103,16 @@ yarn
 yarn start
 ```
 
-## Author
+## Authors
 
 Bartosz Gryszko (b@gryszko.com)
+Markus Lindqvist
+Special thanks to all contributors!
 
 ## License
 
 MIT
 
 ## Special thanks
+
 Special thanks to [Chalk+Chisel](http://chalkchisel.com) for creating working environment where people grow. This component was created for one of the projects we're working on.
