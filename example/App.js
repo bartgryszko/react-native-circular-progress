@@ -1,17 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, PanResponder } from 'react-native';
-import { CircularProgress, AnimatedCircularProgress } from 'react-native-circular-progress';
+import { StyleSheet, Text, PanResponder, View } from 'react-native';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const MAX_POINTS = 500;
 
-export default class Example extends React.Component {
-
+export default class App extends React.Component {
   state = {
     isMoving: false,
     pointsDelta: 0,
     points: 325
   };
-
   componentWillMount() {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -123,4 +121,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   }
 });
-
