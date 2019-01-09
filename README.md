@@ -78,7 +78,7 @@ The `animate`-function returns the timing animation so you can chain, run in par
 
 You can configure the passing by following props:
 
-- **size** – width and height of the circle - could be `number` or `object` if you use `Aniamted.Value()`
+- **size** – width and height of the circle - could be `number` or `object` if you use `Animated.Value()`
 - **width** - thickness of the lines
 - **backgroundWidth** - thickness of the background line
 - **fill** - current, percentage fill (from 0 to 100)
