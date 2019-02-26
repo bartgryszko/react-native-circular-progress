@@ -73,13 +73,15 @@ export default class CircularProgress extends React.PureComponent {
                 fill="transparent"
               />
             )}
-            <Path
-              d={circlePath}
-              stroke={tintColor}
-              strokeWidth={width}
-              strokeLinecap={lineCap}
-              fill="transparent"
-            />
+            {fill > 0 && (
+              <Path
+                d={circlePath}
+                stroke={tintColor}
+                strokeWidth={width}
+                strokeLinecap={lineCap}
+                fill="transparent"
+              />
+            )}
           </G>
         </Svg>
         {children && (
