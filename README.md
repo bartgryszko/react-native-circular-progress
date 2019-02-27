@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dt/react-native-circular-progress.svg)](https://www.npmjs.com/package/react-native-circular-progress)
 
 
-React Native component for creating animated, circular progress. Useful for displaying users points for example. **Works on iOS & Android.**
+React Native component for creating animated, circular progress. Useful for displaying users points for example.
 
 ## Example app
 
@@ -19,19 +19,12 @@ React Native component for creating animated, circular progress. Useful for disp
 
 2. Link native code for SVG:
 
-`react-native link react-native-svg`
+    `react-native link react-native-svg`
 
 ## Usage
-
-Import CircularProgress or AnimatedCircularProgress:
-
 ```js
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-```
 
-Use as follows:
-
-```jsx
 <AnimatedCircularProgress
   size={120}
   width={15}
@@ -41,7 +34,7 @@ Use as follows:
   backgroundColor="#3d5875" />
 ```
 
-You can also define a function, that'll receive current progress and for example display it inside the circle:
+You can also define a function that'll receive current progress and for example display it inside the circle:
 
 ```jsx
 <AnimatedCircularProgress
@@ -52,7 +45,7 @@ You can also define a function, that'll receive current progress and for example
   backgroundColor="#3d5875">
   {
     (fill) => (
-      <Text style={styles.points}>
+      <Text>
         { this.state.fill }
       </Text>
     )
@@ -61,6 +54,7 @@ You can also define a function, that'll receive current progress and for example
 ```
 
 Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `animate(toValue, duration, easing)` function like so:
+
 ```jsx
 <AnimatedCircularProgress
   ref={(ref) => this.circularProgress = ref}
@@ -68,7 +62,7 @@ Finally, you can manually trigger a duration-based timing animation by putting a
 />
 ```
 
-```javascript
+```js
 this.circularProgress.animate(100, 8000, Easing.quad); // Will fill the progress bar linearly in 8 seconds
 ```
 
@@ -76,23 +70,36 @@ The `animate`-function returns the timing animation so you can chain, run in par
 
 ## Configuration
 
-You can configure the passing by following props:
+You can configure the CircularProgress-component by passing the following props:
 
-- **size** – width and height of the circle - could be `number` or `object` if you use `Animated.Value()`
-- **width** - thickness of the lines
-- **backgroundWidth** - thickness of the background line
-- **fill** - current, percentage fill (from 0 to 100)
-- **prefill** - percentage fill before the animation (from 0 to 100)
-- **tintColor** - color of the progress line
-- **backgroundColor** - color of the background for the progress line. If unspecified, no background will be rendered
-- **rotation** - by default, progress starts from the angle = 90⦝, you can change it by setting value from -360 to 360
-- **duration** - duration of the animation in milliseconds. Default is 500ms
-- **easing** - animation easing function
-- **lineCap** - the shape to be used at the ends of the circle. Possible values: butt (default), round or square. (see [here](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-linecap))
-- **arcSweepAngle** - the angle that you want your arc to sweep in the case where you don't want a full circle. Default is 360.
-- **children(fill)** - you can pass function as a child to receive current fill
-- **onAnimationComplete** - you can pass a callback function that will be invoked when animation completes. (see [here](https://facebook.github.io/react-native/docs/animated.html#working-with-animations))
-- **reAnimate(prefill, toVal, dur, ease)** - Run the animation again
+Name             | Type                   | Default value           | Description
+-----------------|------------------------|-------------------------|--------------
+size             | number\|Animated.Value | **required**            | Width and height of circle
+width            | number                 | **required**            | Thickness of the progress line
+backgroundWidth  | number                 | width                   | Thickness of background circle
+fill             | number (0-100)         | 0                       | Current progress / fill
+tintColor        | string                 | black                   | Color of the progress line
+backgroundColor  | string                 |                         | If unspecified, no background line will be rendered
+rotation         | number (-360 - 360)    | 90                      | Angle from which the progress starts from
+lineCap          | string                 | butt                    | Shape used at ends of progress line. Possible values: butt, round, square
+arcSweepAngle    | number (0-360)         | 360                     | If you don't want a full circle, specify the arc angle
+children         | function               |                         | Pass a function as a child. It receiveds the current fill-value as an argument
+
+The following props can further be used on `AnimatedCircularProgress`:
+
+Name                | Type                   | Default value           | Description
+--------------------|------------------------|-------------------------|--------------
+prefill             | number (0-100)         | 0                       | Initial fill-value before animation starts
+duration            | number                 | 500                     | Duration of animation in ms
+easing              | function               | Easing.out(Easing.ease) | Animation easing function
+onAnimationComplete | function               |                         | Function that's invoked when the animation completes (both on mount and if called with `.animate()`)
+
+`AnimatedCircularProgress` also exposes the following functions:
+
+Name        | Arguments                                                           | Description
+------------|-----------                                                          |----------------
+animate     | (toVal: number, duration: number, ease: function)                   | Animate the progress bar to a specific value
+reAnimate   | (prefill: number, toVal: number, duration: number, ease: function)  | Re-run animation with a specified prefill-value
 
 ## Running example app (Expo)
 
@@ -105,9 +112,10 @@ yarn start
 
 ## Authors
 
-Bartosz Gryszko (b@gryszko.com)
-Markus Lindqvist
-Special thanks to all contributors!
+* Bartosz Gryszko (b@gryszko.com)
+* Markus Lindqvist
+* Jacob Lauritzen
+* Special thanks to all contributors!
 
 ## License
 
