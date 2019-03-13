@@ -43,11 +43,14 @@ export default class CircularProgress extends React.PureComponent {
     const backgroundPath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle);
     const circlePath = this.circlePath(size / 2, size / 2, size / 2 - width / 2, 0, arcSweepAngle * this.clampFill(fill) / 100);
     const offset = size - (width * 2);
+    const adjustedSize = backgroundWidth > width ? size + width : size;
+    const adjustedOrigin = backgroundWidth > width ? width / 2 : 0;
+    const adjustedPosition = backgroundWidth > width ? width * 1.5 : width;
 
     const childContainerStyle = {
       position: 'absolute',
-      left: width,
-      top: width,
+      left: adjustedPosition,
+      top: adjustedPosition,
       width: offset,
       height: offset,
       borderRadius: offset / 2,
@@ -59,13 +62,15 @@ export default class CircularProgress extends React.PureComponent {
     return (
       <View style={style}>
         <Svg
-          width={size}
-          height={size}
+          width={adjustedSize}
+          height={adjustedSize}
           style={{ backgroundColor: 'transparent' }}
         >
-          <G rotation={rotation} originX={size/2} originY={size/2}>
+          <G rotation={rotation} originX={adjustedSize/2} originY={adjustedSize/2}>
             { backgroundColor && (
               <Path
+                x={adjustedOrigin}
+                y={adjustedOrigin}
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
@@ -75,6 +80,8 @@ export default class CircularProgress extends React.PureComponent {
             )}
             {fill > 0 && (
               <Path
+                x={adjustedOrigin}
+                y={adjustedOrigin}
                 d={circlePath}
                 stroke={tintColor}
                 strokeWidth={width}
