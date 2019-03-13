@@ -8,7 +8,7 @@ export default class App extends React.Component {
   state = {
     isMoving: false,
     pointsDelta: 0,
-    points: 325
+    points: 325,
   };
   componentWillMount() {
     this._panResponder = PanResponder.create({
@@ -34,31 +34,26 @@ export default class App extends React.Component {
         this.setState({
           isMoving: false,
           points: points > 0 ? Math.min(points, MAX_POINTS) : 0,
-          pointsDelta: 0
+          pointsDelta: 0,
         });
       },
     });
   }
 
   render() {
-    const fill = this.state.points / MAX_POINTS * 100;
+    const fill = (this.state.points / MAX_POINTS) * 100;
 
     return (
-      <View
-        style={styles.container}
-        {...this._panResponder.panHandlers}>
+      <View style={styles.container} {...this._panResponder.panHandlers}>
         <AnimatedCircularProgress
           size={200}
           width={3}
+          backgroundWidth={30}
           fill={fill}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
         >
-          {(fill) => (
-            <Text style={styles.points}>
-              { Math.round(MAX_POINTS * fill / 100) }
-            </Text>
-          )}
+          {fill => <Text style={styles.points}>{Math.round((MAX_POINTS * fill) / 100)}</Text>}
         </AnimatedCircularProgress>
 
         <AnimatedCircularProgress
@@ -85,8 +80,8 @@ export default class App extends React.Component {
         />
 
         <Text style={[styles.pointsDelta, this.state.isMoving && styles.pointsDeltaActive]}>
-          { this.state.pointsDelta >= 0 && '+' }
-          { this.state.pointsDelta }
+          {this.state.pointsDelta >= 0 && '+'}
+          {this.state.pointsDelta}
         </Text>
       </View>
     );
@@ -95,29 +90,24 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   points: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: 72,
-    left: 56,
-    width: 90,
     textAlign: 'center',
     color: '#7591af',
     fontSize: 50,
-    fontWeight: "100"
+    fontWeight: '100',
   },
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#152d44',
-    padding: 50
+    padding: 50,
   },
   pointsDelta: {
     color: '#4c6479',
     fontSize: 50,
-    fontWeight: "100"
+    fontWeight: '100',
   },
   pointsDeltaActive: {
     color: '#fff',
-  }
+  },
 });
