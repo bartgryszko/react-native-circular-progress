@@ -1,4 +1,3 @@
-
 declare module 'react-native-circular-progress' {
   import React from 'react';
   import { Animated, Easing } from 'react-native';
@@ -100,10 +99,10 @@ declare module 'react-native-circular-progress' {
 
     /**
      * 
-     * @type {(param: any) => any}
+     * @type {Function}
      * @default Easing.out(Easing.ease)
      */
-    easing?: (param: any) => any;
+    easing?: () => void;
 
     /**
      * Function that's invoked when the animation completes (both on mount and if called with .animate())
