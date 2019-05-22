@@ -1,6 +1,6 @@
 declare module 'react-native-circular-progress' {
   import * as React from 'react';
-  import { Animated, Easing } from 'react-native';
+  import { Animated, Easing, ViewPropTypes } from 'react-native';
 
   export interface AnimatedCircularProgressProps {
     /**
@@ -73,6 +73,13 @@ declare module 'react-native-circular-progress' {
     arcSweepAngle?: number;
 
     /**
+     * Style of the entire progress container
+     * 
+     * @type {ViewPropTypes.style}
+     */
+    style?: ViewPropTypes.style;
+
+    /**
      * Pass a function as a child. It receiveds the current fill-value as an argument
      * 
      * @type {Function}
@@ -80,6 +87,13 @@ declare module 'react-native-circular-progress' {
      * @return {JSX.Element} the element inside the circle
      */
     children?: (fill: number) => JSX.Element;
+
+    /**
+     * Style of the children container
+     * 
+     * @type {ViewPropTypes.style}
+     */
+    childrenContainerStyle?: ViewPropTypes.style;
 
     /**
      * Initial fill-value before animation starts

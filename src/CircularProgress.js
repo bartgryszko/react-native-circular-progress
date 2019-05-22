@@ -35,6 +35,7 @@ export default class CircularProgress extends React.PureComponent {
       arcSweepAngle,
       fill,
       children,
+      childrenContainerStyle,
     } = this.props;
 
     const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
@@ -55,17 +56,20 @@ export default class CircularProgress extends React.PureComponent {
     );
     const offset = size - maxWidthCircle * 2;
 
-    const childContainerStyle = {
-      position: 'absolute',
-      left: maxWidthCircle,
-      top: maxWidthCircle,
-      width: offset,
-      height: offset,
-      borderRadius: offset / 2,
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    };
+    const localChildrenContainerStyle = {
+      ...{
+        position: 'absolute',
+        left: maxWidthCircle,
+        top: maxWidthCircle,
+        width: offset,
+        height: offset,
+        borderRadius: offset / 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      }, 
+      ...childrenContainerStyle,
+    }
 
     return (
       <View style={style}>
@@ -91,7 +95,7 @@ export default class CircularProgress extends React.PureComponent {
             )}
           </G>
         </Svg>
-        {children && <View style={childContainerStyle}>{children(fill)}</View>}
+        {children && <View style={localChildrenContainerStyle}>{children(fill)}</View>}
       </View>
     );
   }
@@ -109,6 +113,7 @@ CircularProgress.propTypes = {
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
   children: PropTypes.func,
+  childrenContainerStyle: ViewPropTypes.style,
 };
 
 CircularProgress.defaultProps = {
