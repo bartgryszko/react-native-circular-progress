@@ -72,18 +72,20 @@ The `animate`-function returns the timing animation so you can chain, run in par
 
 You can configure the CircularProgress-component by passing the following props:
 
-Name             | Type                   | Default value           | Description
------------------|------------------------|-------------------------|--------------
-size             | number\|Animated.Value | **required**            | Width and height of circle
-width            | number                 | **required**            | Thickness of the progress line
-backgroundWidth  | number                 | width                   | Thickness of background circle
-fill             | number (0-100)         | 0                       | Current progress / fill
-tintColor        | string                 | black                   | Color of the progress line
-backgroundColor  | string                 |                         | If unspecified, no background line will be rendered
-rotation         | number (-360 - 360)    | 90                      | Angle from which the progress starts from
-lineCap          | string                 | butt                    | Shape used at ends of progress line. Possible values: butt, round, square
-arcSweepAngle    | number (0-360)         | 360                     | If you don't want a full circle, specify the arc angle
-children         | function               |                         | Pass a function as a child. It receiveds the current fill-value as an argument
+Name                  | Type                   | Default value           | Description
+----------------------|------------------------|-------------------------|--------------
+size                  | number\|Animated.Value | **required**            | Width and height of circle
+width                 | number                 | **required**            | Thickness of the progress line
+backgroundWidth       | number                 | width                   | Thickness of background circle
+fill                  | number (0-100)         | 0                       | Current progress / fill
+tintColor             | string                 | black                   | Color of the progress line
+backgroundColor       | string                 |                         | If unspecified, no background line will be rendered
+rotation              | number (-360 - 360)    | 90                      | Angle from which the progress starts from
+lineCap               | string                 | butt                    | Shape used at ends of progress line. Possible values: butt, round, square
+arcSweepAngle         | number (0-360)         | 360                     | If you don't want a full circle, specify the arc angle
+style                 | ViewPropTypes.style    |                         | Extra styling for the main container
+children              | function               |                         | Pass a function as a child. It receiveds the current fill-value as an argument
+childrenContainerStyle| ViewPropTypes.style    |                         | Extra styling for the children container
 
 The following props can further be used on `AnimatedCircularProgress`:
 
