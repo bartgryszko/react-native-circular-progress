@@ -10,13 +10,12 @@ export default class App extends React.Component {
     points: 325,
   };
 
-  _panResponder : PanResponderInstance = undefined;
+  _panResponder : PanResponderInstance;
+  _circularProgressRef: React.RefObject<AnimatedCircularProgress>;
 
-  circularProgress() {
-    return this.refs.circularProgress as AnimatedCircularProgress;
-  }
-
-  componentWillMount() {
+  constructor(props: Readonly<{}>) {
+    super(props);
+    this._circularProgressRef = React.createRef();
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
@@ -28,13 +27,17 @@ export default class App extends React.Component {
       },
 
       onPanResponderMove: (evt, gestureState) => {
-        this.circularProgress().animate(0, 0);
+        if (this._circularProgressRef.current) {
+          this._circularProgressRef.current.animate(0, 0);
+        }
         // For each 2 pixels add or subtract 1 point
         this.setState({ pointsDelta: Math.round(-gestureState.dy / 2) });
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        this.circularProgress().animate(100, 3000);
+        if (this._circularProgressRef.current) {
+          this._circularProgressRef.current.animate(100, 3000);
+        }
         let points = this.state.points + this.state.pointsDelta;
         console.log(Math.min(points, MAX_POINTS));
         this.setState({
@@ -79,7 +82,7 @@ export default class App extends React.Component {
           fill={0}
           tintColor="#00e0ff"
           onAnimationComplete={() => console.log('onAnimationComplete')}
-          ref="circularProgress"
+          ref={this._circularProgressRef}
           backgroundColor="#3d5875"
           arcSweepAngle={180}
         />

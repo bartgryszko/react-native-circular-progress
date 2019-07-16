@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "noEmit": true,
     "lib": ["dom", "esnext"],
     "jsx": "react-native",
