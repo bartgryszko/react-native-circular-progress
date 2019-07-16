@@ -1,15 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, PanResponder, View } from 'react-native';
+import { StyleSheet, Text, PanResponder, View, PanResponderInstance } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const MAX_POINTS = 500;
-
 export default class App extends React.Component {
   state = {
     isMoving: false,
     pointsDelta: 0,
     points: 325,
   };
+
+  _panResponder : PanResponderInstance = undefined;
+
+  circularProgress() {
+    return this.refs.circularProgress as AnimatedCircularProgress;
+  }
+
   componentWillMount() {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -22,13 +28,13 @@ export default class App extends React.Component {
       },
 
       onPanResponderMove: (evt, gestureState) => {
-        this.refs.circularProgress.animate(0, 0);
+        this.circularProgress().animate(0, 0);
         // For each 2 pixels add or subtract 1 point
         this.setState({ pointsDelta: Math.round(-gestureState.dy / 2) });
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        this.refs.circularProgress.animate(100, 3000);
+        this.circularProgress().animate(100, 3000);
         let points = this.state.points + this.state.pointsDelta;
         console.log(Math.min(points, MAX_POINTS));
         this.setState({
@@ -39,10 +45,9 @@ export default class App extends React.Component {
       },
     });
   }
-
+  
   render() {
     const fill = (this.state.points / MAX_POINTS) * 100;
-
     return (
       <View style={styles.container} {...this._panResponder.panHandlers}>
         <AnimatedCircularProgress
