@@ -35,7 +35,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     const toValue = toVal >= 0 ? toVal : this.props.fill;
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
-
+    console.log("THE KEY: " + JSON.stringify(this.state.fillAnimation));
     const anim = Animated.timing(this.state.fillAnimation, {
       toValue,
       easing,
@@ -46,10 +46,23 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     return anim;
   }
 
+  animateColor() {
+    if (!this.props.tintColorSecondary) {
+      return this.props.tintColor
+    }
+    
+    const tintAnimation = this.state.fillAnimation.interpolate({
+      inputRange: [0, 100],
+      outputRange: [this.props.tintColor, this.props.tintColorSecondary]
+    })
+
+    return tintAnimation
+  }
+
   render() {
     const { fill, prefill, ...other } = this.props;
 
-    return <AnimatedProgress {...other} fill={this.state.fillAnimation} />;
+    return <AnimatedProgress {...other} fill={this.state.fillAnimation} tintColor={this.animateColor()} />;
   }
 }
 
