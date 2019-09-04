@@ -35,7 +35,6 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     const toValue = toVal >= 0 ? toVal : this.props.fill;
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
-    console.log("THE KEY: " + JSON.stringify(this.state.fillAnimation));
     const anim = Animated.timing(this.state.fillAnimation, {
       toValue,
       easing,
