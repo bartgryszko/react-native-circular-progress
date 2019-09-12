@@ -141,7 +141,7 @@ declare module 'react-native-circular-progress' {
      * @param {number} duration
      * @param {Function} ease
      */
-    animate: (toVal: number, duration: number, ease?: Function) => void;
+    animate: (toVal: number, duration: number, ease?: Function) => Animated.CompositeAnimation;
 
     /**
      * Re-run animation with a specified prefill-value
