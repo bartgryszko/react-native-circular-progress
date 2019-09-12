@@ -95,6 +95,7 @@ prefill             | number (0-100)         | 0                       | Initial
 duration            | number                 | 500                     | Duration of animation in ms
 easing              | function               | Easing.out(Easing.ease) | Animation easing function
 onAnimationComplete | function               |                         | Function that's invoked when the animation completes (both on mount and if called with `.animate()`)
+tintColorSecondary  | string                 | the same as tintColor   | To change fill color from tintColor to tintColorSecondary as animation progresses
 
 `AnimatedCircularProgress` also exposes the following functions:
 
@@ -107,7 +108,7 @@ reAnimate   | (prefill: number, toVal: number, duration: number, ease: function)
 
 ```sh
 git clone https://github.com/bgryszko/react-native-circular-progress.git
-cd react-native-circular-progress/example
+cd react-native-circular-progress/example-app
 yarn
 yarn start
 ```

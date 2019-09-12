@@ -69,7 +69,8 @@ export default class App extends React.Component {
           width={15}
           backgroundWidth={5}
           fill={fill}
-          tintColor="#00e0ff"
+          tintColor="#00ff00"
+          tintColorSecondary="#ff0000"
           backgroundColor="#3d5875"
           arcSweepAngle={240}
           rotation={240}
