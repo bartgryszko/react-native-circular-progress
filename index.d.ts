@@ -129,13 +129,6 @@ declare module 'react-native-circular-progress' {
      *
      */
     onAnimationComplete?: (event: { finished: boolean }) => void;
-
-    /**
-     * Test indentificator
-     *
-     * @type {string}
-     */
-    testID?: string;
   }
 
   export class AnimatedCircularProgress extends React.Component<
