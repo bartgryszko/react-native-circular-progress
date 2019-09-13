@@ -53,6 +53,20 @@ You can also define a function that'll receive current progress and for example 
 </AnimatedCircularProgress>
 ```
 
+You can also define a function that'll receive the location at the top of the progress circle and render a custom SVG element:
+
+```jsx
+<AnimatedCircularProgress
+  size={120}
+  width={15}
+  fill={100}
+  tintColor="#00e0ff"
+  backgroundColor="#3d5875"
+  padding={10}
+  renderCap={({ center }) => <Circle cx={center.x} cy={center.y} r="10" fill="blue" />}
+  />
+```
+
 Finally, you can manually trigger a duration-based timing animation by putting a ref on the component and calling the `animate(toValue, duration, easing)` function like so:
 
 ```jsx
@@ -86,6 +100,9 @@ arcSweepAngle         | number (0-360)         | 360                     | If yo
 style                 | ViewPropTypes.style    |                         | Extra styling for the main container
 children              | function               |                         | Pass a function as a child. It receiveds the current fill-value as an argument
 childrenContainerStyle| ViewPropTypes.style    |                         | Extra styling for the children container
+padding               | number                 | 0                       | Padding applied around the circle to allow for a cap that bleeds outside its boundary
+renderCap             | function               | undefined               | Function that's invoked during rendering to draw at the tip of the progress circle
+
 
 The following props can further be used on `AnimatedCircularProgress`:
 
