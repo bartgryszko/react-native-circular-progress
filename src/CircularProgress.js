@@ -36,31 +36,44 @@ export default class CircularProgress extends React.PureComponent {
       fill,
       children,
       childrenContainerStyle,
+      padding,
+      renderCap,
     } = this.props;
 
     const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
+    const sizeWithPadding = size / 2 + padding / 2;
+    const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
     const backgroundPath = this.circlePath(
-      size / 2,
-      size / 2,
-      size / 2 - maxWidthCircle / 2,
+      sizeWithPadding,
+      sizeWithPadding,
+      radius,
       0,
       arcSweepAngle
     );
+    const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
     const circlePath = this.circlePath(
-      size / 2,
-      size / 2,
-      size / 2 - maxWidthCircle / 2,
+      sizeWithPadding,
+      sizeWithPadding,
+      radius,
       0,
-      (arcSweepAngle * this.clampFill(fill)) / 100
+      currentFillAngle
     );
+    const coordinate = this.polarToCartesian(
+      sizeWithPadding,
+      sizeWithPadding,
+      radius,
+      currentFillAngle
+    );
+    const cap = this.props.renderCap ? this.props.renderCap({ center: coordinate }) : null;
+
     const offset = size - maxWidthCircle * 2;
 
     const localChildrenContainerStyle = {
       ...{
         position: 'absolute',
-        left: maxWidthCircle,
-        top: maxWidthCircle,
+        left: maxWidthCircle + padding / 2,
+        top: maxWidthCircle + padding / 2,
         width: offset,
         height: offset,
         borderRadius: offset / 2,
@@ -73,7 +86,7 @@ export default class CircularProgress extends React.PureComponent {
 
     return (
       <View style={style}>
-        <Svg width={size} height={size} style={{ backgroundColor: 'transparent' }}>
+        <Svg width={size + padding} height={size + padding}>
           <G rotation={rotation} originX={size / 2} originY={size / 2}>
             {backgroundColor && (
               <Path
@@ -93,6 +106,7 @@ export default class CircularProgress extends React.PureComponent {
                 fill="transparent"
               />
             )}
+            {cap}
           </G>
         </Svg>
         {children && <View style={localChildrenContainerStyle}>{children(fill)}</View>}
@@ -114,6 +128,8 @@ CircularProgress.propTypes = {
   arcSweepAngle: PropTypes.number,
   children: PropTypes.func,
   childrenContainerStyle: ViewPropTypes.style,
+  padding: PropTypes.number,
+  renderCap: PropTypes.func,
 };
 
 CircularProgress.defaultProps = {
@@ -121,4 +137,5 @@ CircularProgress.defaultProps = {
   rotation: 90,
   lineCap: 'butt',
   arcSweepAngle: 360,
+  paddinig: 0,
 };
