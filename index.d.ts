@@ -129,6 +129,22 @@ declare module 'react-native-circular-progress' {
      *
      */
     onAnimationComplete?: (event: { finished: boolean }) => void;
+
+    /**
+     * Padding applied around the circle to allow for a cap that bleeds outside its boundary
+     *
+     * @type {number}
+     * @default 0
+     */
+    padding?: number;
+
+    /**
+     * Function that's invoked during rendering to draw at the tip of the progress circle
+     *
+     */
+    renderCap?: (payload: {
+      center: { x: number; y: number };
+    }) => React.ReactNode;
   }
 
   export class AnimatedCircularProgress extends React.Component<
