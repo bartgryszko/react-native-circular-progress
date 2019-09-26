@@ -145,6 +145,14 @@ declare module 'react-native-circular-progress' {
     renderCap?: (payload: {
       center: { x: number; y: number };
     }) => React.ReactNode;
+
+    /**
+     * Use dashed type for background
+     *
+     * @type { width: number; gap: number }
+     * @default '{ width: 0, gap: 0 }'
+     */
+    dashedBackground?: { width: number; gap: number };
   }
 
   export class AnimatedCircularProgress extends React.Component<
