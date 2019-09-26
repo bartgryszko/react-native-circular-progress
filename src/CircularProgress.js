@@ -144,6 +144,6 @@ CircularProgress.defaultProps = {
   rotation: 90,
   lineCap: 'butt',
   arcSweepAngle: 360,
-  paddinig: 0,
+  padding: 0,
   dashedBackground: { width: 0, gap: 0 },
 };
