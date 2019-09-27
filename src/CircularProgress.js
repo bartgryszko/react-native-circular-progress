@@ -38,6 +38,7 @@ export default class CircularProgress extends React.PureComponent {
       childrenContainerStyle,
       padding,
       renderCap,
+      dashedBackground,
     } = this.props;
 
     const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
@@ -80,9 +81,13 @@ export default class CircularProgress extends React.PureComponent {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-      }, 
+      },
       ...childrenContainerStyle,
     }
+
+    const dashedBackgroundStyle = dashedBackground.gap > 0
+      ? `${dashedBackground.width}, ${dashedBackground.gap}`
+      : dashedBackground;
 
     return (
       <View style={style}>
@@ -94,6 +99,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
                 strokeLinecap={lineCap}
+                strokeDasharray={dashedBackgroundStyle}
                 fill="transparent"
               />
             )}
@@ -130,6 +136,7 @@ CircularProgress.propTypes = {
   childrenContainerStyle: ViewPropTypes.style,
   padding: PropTypes.number,
   renderCap: PropTypes.func,
+  dashedBackground: PropTypes.object,
 };
 
 CircularProgress.defaultProps = {
@@ -137,5 +144,6 @@ CircularProgress.defaultProps = {
   rotation: 90,
   lineCap: 'butt',
   arcSweepAngle: 360,
-  paddinig: 0,
+  padding: 0,
+  dashedBackground: { width: 0, gap: 0 },
 };

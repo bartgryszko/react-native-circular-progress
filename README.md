@@ -101,8 +101,8 @@ style                 | ViewPropTypes.style    |                         | Extra
 children              | function               |                         | Pass a function as a child. It receiveds the current fill-value as an argument
 childrenContainerStyle| ViewPropTypes.style    |                         | Extra styling for the children container
 padding               | number                 | 0                       | Padding applied around the circle to allow for a cap that bleeds outside its boundary
+dashedBackground      | object                 | { width: 0, gap: 0 }    | Bar background as dashed type
 renderCap             | function               | undefined               | Function that's invoked during rendering to draw at the tip of the progress circle
-
 
 The following props can further be used on `AnimatedCircularProgress`:
 
