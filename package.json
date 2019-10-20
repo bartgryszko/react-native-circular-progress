@@ -1,6 +1,6 @@
 {
   "name": "react-native-circular-progress",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "React Native component for creating animated, circular progress with react-native-svg",
   "main": "index.js",
   "repository": {
