@@ -99,7 +99,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
                 strokeLinecap={lineCap}
-                strokeDasharray={dashedBackgroundStyle}
+                strokeDasharray={Object.values(dashedBackgroundStyle)}
                 fill="transparent"
               />
             )}
