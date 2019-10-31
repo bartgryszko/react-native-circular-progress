@@ -88,6 +88,9 @@ export default class CircularProgress extends React.PureComponent {
     const dashedBackgroundStyle = dashedBackground.gap > 0
       ? `${dashedBackground.width}, ${dashedBackground.gap}`
       : dashedBackground;
+    
+    const strokeDasharray = Object.values(dashedBackgroundStyle)
+      .map(value => parseInt(value));
 
     return (
       <View style={style}>
@@ -99,7 +102,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
                 strokeLinecap={lineCap}
-                strokeDasharray={Object.values(dashedBackgroundStyle)}
+                strokeDasharray={strokeDasharray}
                 fill="transparent"
               />
             )}
