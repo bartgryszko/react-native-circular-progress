@@ -86,16 +86,16 @@ export default class CircularProgress extends React.PureComponent {
     }
 
     const dashedBackgroundStyle = dashedBackground.gap > 0
-      ? `${dashedBackground.width}, ${dashedBackground.gap}`
-      : dashedBackground;
-    
+      ? dashedBackground
+      : { width:0, gap:0 };
+
     const strokeDasharray = Object.values(dashedBackgroundStyle)
       .map(value => parseInt(value));
 
     return (
       <View style={style}>
         <Svg width={size + padding} height={size + padding}>
-          <G rotation={rotation} originX={size / 2} originY={size / 2}>
+          <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
             {backgroundColor && (
               <Path
                 d={backgroundPath}
