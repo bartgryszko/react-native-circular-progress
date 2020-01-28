@@ -52,7 +52,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     if (!this.props.tintColorSecondary) {
       return this.props.tintColor
     }
-    
+
     const tintAnimation = this.state.fillAnimation.interpolate({
       inputRange: [0, 100],
       outputRange: [this.props.tintColor, this.props.tintColorSecondary]
@@ -81,5 +81,5 @@ AnimatedCircularProgress.defaultProps = {
   duration: 500,
   easing: Easing.out(Easing.ease),
   prefill: 0,
-  useNativeDriver: true,
+  useNativeDriver: false,
 };
