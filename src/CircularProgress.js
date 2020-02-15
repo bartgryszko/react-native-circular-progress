@@ -45,14 +45,15 @@ export default class CircularProgress extends React.PureComponent {
     const sizeWithPadding = size / 2 + padding / 2;
     const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
-    const backgroundPath = this.circlePath(
+   
+    const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
+     const backgroundPath = this.circlePath(
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      0,
+      currentFillAngle,
       arcSweepAngle
     );
-    const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
     const circlePath = this.circlePath(
       sizeWithPadding,
       sizeWithPadding,
@@ -114,6 +115,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={tintColor}
                 strokeWidth={width}
                 strokeLinecap={lineCap}
+                strokeDasharray={strokeDasharray}
                 fill="transparent"
               />
             )}
