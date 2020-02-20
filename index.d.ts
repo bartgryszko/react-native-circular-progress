@@ -40,6 +40,14 @@ declare module 'react-native-circular-progress' {
     fill?: number;
 
     /**
+     * Current progress / fillTransparency
+     *
+     * @type {boolean}
+     * @default true
+     */
+    fillTransparency?: boolean;
+
+    /**
      * Color of the progress line
      *
      * @type {string}
@@ -49,7 +57,7 @@ declare module 'react-native-circular-progress' {
 
     /**
      * Change the fill color from tintColor to tintColorSecondary as animation progresses.
-     * 
+     *
      * @type {string}
      * @default 'undefined'
      */
@@ -153,6 +161,14 @@ declare module 'react-native-circular-progress' {
     renderCap?: (payload: {
       center: { x: number; y: number };
     }) => React.ReactNode;
+
+    /**
+     * Use dashed type for fill
+     *
+     * @type { width: number; gap: number }
+     * @default '{ width: 0, gap: 0 }'
+     */
+    dashedFill?: { width: number; gap: number };
 
     /**
      * Use dashed type for background
