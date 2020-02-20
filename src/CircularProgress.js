@@ -34,24 +34,25 @@ export default class CircularProgress extends React.PureComponent {
       lineCap,
       arcSweepAngle,
       fill,
+      fillTransparency,
       children,
       childrenContainerStyle,
       padding,
       renderCap,
       dashedBackground,
+      dashedFill
     } = this.props;
 
     const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
     const sizeWithPadding = size / 2 + padding / 2;
     const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
-   
     const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
-     const backgroundPath = this.circlePath(
+    const backgroundPath = this.circlePath(
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      currentFillAngle,
+      fillTransparency ? 0 : currentFillAngle,
       arcSweepAngle
     );
     const circlePath = this.circlePath(
@@ -86,13 +87,14 @@ export default class CircularProgress extends React.PureComponent {
       ...childrenContainerStyle,
     }
 
-    const dashedBackgroundStyle = dashedBackground.gap > 0
-      ? dashedBackground
-      : { width:0, gap:0 };
+    const strokeDasharrayFill = dashedFill.gap > 0 ?
+      Object.values(dashedFill)
+      .map(value => parseInt(value))
+      : null;
 
-    const strokeDasharray = dashedBackground.gap > 0 ? 
-    Object.values(dashedBackgroundStyle)
-      .map(value => parseInt(value)) 
+    const strokeDasharrayBackground = dashedBackground.gap > 0 ?
+      Object.values(dashedBackground)
+      .map(value => parseInt(value))
       : null;
 
     return (
@@ -105,7 +107,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
                 strokeLinecap={lineCap}
-                strokeDasharray={strokeDasharray}
+                strokeDasharray={strokeDasharrayBackground}
                 fill="transparent"
               />
             )}
@@ -115,7 +117,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={tintColor}
                 strokeWidth={width}
                 strokeLinecap={lineCap}
-                strokeDasharray={strokeDasharray}
+                strokeDasharray={strokeDasharrayFill}
                 fill="transparent"
               />
             )}
@@ -132,6 +134,7 @@ CircularProgress.propTypes = {
   style: ViewPropTypes.style,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
+  fillTransparency: PropTypes.boolean,
   width: PropTypes.number.isRequired,
   backgroundWidth: PropTypes.number,
   tintColor: PropTypes.string,
@@ -144,6 +147,7 @@ CircularProgress.propTypes = {
   padding: PropTypes.number,
   renderCap: PropTypes.func,
   dashedBackground: PropTypes.object,
+  dashedFill: PropTypes.object
 };
 
 CircularProgress.defaultProps = {
@@ -153,4 +157,6 @@ CircularProgress.defaultProps = {
   arcSweepAngle: 360,
   padding: 0,
   dashedBackground: { width: 0, gap: 0 },
+  dashedFill: { width: 0, gap: 0 },
+  fillTransparency: true
 };
