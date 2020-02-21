@@ -28,19 +28,19 @@ export default class CircularProgress extends React.PureComponent {
       width,
       backgroundWidth,
       tintColor,
+      tintTransparency,
       backgroundColor,
       style,
       rotation,
       lineCap,
       arcSweepAngle,
       fill,
-      fillTransparency,
       children,
       childrenContainerStyle,
       padding,
       renderCap,
       dashedBackground,
-      dashedFill
+      dashedTint
     } = this.props;
 
     const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
@@ -52,7 +52,7 @@ export default class CircularProgress extends React.PureComponent {
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      fillTransparency ? 0 : currentFillAngle,
+      tintTransparency ? 0 : currentFillAngle,
       arcSweepAngle
     );
     const circlePath = this.circlePath(
@@ -87,8 +87,8 @@ export default class CircularProgress extends React.PureComponent {
       ...childrenContainerStyle,
     }
 
-    const strokeDasharrayFill = dashedFill.gap > 0 ?
-      Object.values(dashedFill)
+    const strokeDasharrayTint = dashedTint.gap > 0 ?
+      Object.values(dashedTint)
       .map(value => parseInt(value))
       : null;
 
@@ -117,7 +117,7 @@ export default class CircularProgress extends React.PureComponent {
                 stroke={tintColor}
                 strokeWidth={width}
                 strokeLinecap={lineCap}
-                strokeDasharray={strokeDasharrayFill}
+                strokeDasharray={strokeDasharrayTint}
                 fill="transparent"
               />
             )}
@@ -134,10 +134,10 @@ CircularProgress.propTypes = {
   style: ViewPropTypes.style,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
-  fillTransparency: PropTypes.boolean,
   width: PropTypes.number.isRequired,
   backgroundWidth: PropTypes.number,
   tintColor: PropTypes.string,
+  tintTransparency: PropTypes.bool,
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
   lineCap: PropTypes.string,
@@ -147,16 +147,16 @@ CircularProgress.propTypes = {
   padding: PropTypes.number,
   renderCap: PropTypes.func,
   dashedBackground: PropTypes.object,
-  dashedFill: PropTypes.object
+  dashedTint: PropTypes.object
 };
 
 CircularProgress.defaultProps = {
   tintColor: 'black',
+  tintTransparency: true,
   rotation: 90,
   lineCap: 'butt',
   arcSweepAngle: 360,
   padding: 0,
   dashedBackground: { width: 0, gap: 0 },
-  dashedFill: { width: 0, gap: 0 },
-  fillTransparency: true
+  dashedTint: { width: 0, gap: 0 },
 };
