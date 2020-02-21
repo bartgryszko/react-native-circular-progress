@@ -93,15 +93,17 @@ width                 | number                 | **required**            | Thick
 backgroundWidth       | number                 | width                   | Thickness of background circle
 fill                  | number (0-100)         | 0                       | Current progress / fill
 tintColor             | string                 | black                   | Color of the progress line
+tintTransparency      | boolean                | true                    | Transparency of the progress line
 backgroundColor       | string                 |                         | If unspecified, no background line will be rendered
 rotation              | number (-360 - 360)    | 90                      | Angle from which the progress starts from
 lineCap               | string                 | butt                    | Shape used at ends of progress line. Possible values: butt, round, square
 arcSweepAngle         | number (0-360)         | 360                     | If you don't want a full circle, specify the arc angle
 style                 | ViewPropTypes.style    |                         | Extra styling for the main container
-children              | function               |                         | Pass a function as a child. It receiveds the current fill-value as an argument
+children              | function               |                         | Pass a function as a child. It received the current fill-value as an argument
 childrenContainerStyle| ViewPropTypes.style    |                         | Extra styling for the children container
 padding               | number                 | 0                       | Padding applied around the circle to allow for a cap that bleeds outside its boundary
 dashedBackground      | object                 | { width: 0, gap: 0 }    | Bar background as dashed type
+dashedTint            | object                 | { width: 0, gap: 0 }    | Bar tint as dashed type
 renderCap             | function               | undefined               | Function that's invoked during rendering to draw at the tip of the progress circle
 
 The following props can further be used on `AnimatedCircularProgress`:
