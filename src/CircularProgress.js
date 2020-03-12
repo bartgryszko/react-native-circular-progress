@@ -1,23 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, ViewPropTypes } from 'react-native';
-import { Svg, Path, G } from 'react-native-svg';
+import React from "react";
+import PropTypes from "prop-types";
+import { View, ViewPropTypes } from "react-native";
+import { Svg, Path, G } from "react-native-svg";
 
 export default class CircularProgress extends React.PureComponent {
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
     return {
       x: centerX + radius * Math.cos(angleInRadians),
-      y: centerY + radius * Math.sin(angleInRadians),
+      y: centerY + radius * Math.sin(angleInRadians)
     };
   }
 
   circlePath(x, y, radius, startAngle, endAngle) {
     var start = this.polarToCartesian(x, y, radius, endAngle * 0.9999);
     var end = this.polarToCartesian(x, y, radius, startAngle);
-    var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
-    var d = ['M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y];
-    return d.join(' ');
+    var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+    var d = [
+      "M",
+      start.x,
+      start.y,
+      "A",
+      radius,
+      radius,
+      0,
+      largeArcFlag,
+      0,
+      end.x,
+      end.y
+    ];
+    return d.join(" ");
   }
 
   clampFill = fill => Math.min(100, Math.max(0, fill));
@@ -30,6 +42,8 @@ export default class CircularProgress extends React.PureComponent {
       tintColor,
       tintTransparency,
       backgroundColor,
+      lineSpaceWidth,
+      lineSpaceColor,
       style,
       rotation,
       lineCap,
@@ -43,7 +57,9 @@ export default class CircularProgress extends React.PureComponent {
       dashedTint
     } = this.props;
 
-    const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
+    const maxWidthCircle = backgroundWidth
+      ? Math.max(width, backgroundWidth)
+      : width;
     const sizeWithPadding = size / 2 + padding / 2;
     const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
@@ -68,39 +84,45 @@ export default class CircularProgress extends React.PureComponent {
       radius,
       currentFillAngle
     );
-    const cap = this.props.renderCap ? this.props.renderCap({ center: coordinate }) : null;
+    const cap = this.props.renderCap
+      ? this.props.renderCap({ center: coordinate })
+      : null;
 
     const offset = size - maxWidthCircle * 2;
 
     const localChildrenContainerStyle = {
       ...{
-        position: 'absolute',
+        position: "absolute",
         left: maxWidthCircle + padding / 2,
         top: maxWidthCircle + padding / 2,
         width: offset,
         height: offset,
         borderRadius: offset / 2,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden"
       },
-      ...childrenContainerStyle,
-    }
+      ...childrenContainerStyle
+    };
 
-    const strokeDasharrayTint = dashedTint.gap > 0 ?
-      Object.values(dashedTint)
-      .map(value => parseInt(value))
-      : null;
+    const strokeDasharrayTint =
+      dashedTint.gap > 0
+        ? Object.values(dashedTint).map(value => parseInt(value))
+        : null;
 
-    const strokeDasharrayBackground = dashedBackground.gap > 0 ?
-      Object.values(dashedBackground)
-      .map(value => parseInt(value))
-      : null;
+    const strokeDasharrayBackground =
+      dashedBackground.gap > 0
+        ? Object.values(dashedBackground).map(value => parseInt(value))
+        : null;
 
     return (
       <View style={style}>
         <Svg width={size + padding} height={size + padding}>
-          <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
+          <G
+            rotation={rotation}
+            originX={(size + padding) / 2}
+            originY={(size + padding) / 2}
+          >
             {backgroundColor && (
               <Path
                 d={backgroundPath}
@@ -123,8 +145,30 @@ export default class CircularProgress extends React.PureComponent {
             )}
             {cap}
           </G>
+          {lineSpaceWidth && (
+            <>
+              <Line
+                x1={(size + padding) / 2}
+                y1="0"
+                x2={(size + padding) / 2}
+                y2={size + padding}
+                stroke={lineSpaceColor}
+                strokeWidth={lineSpaceWidth}
+              />
+              <Line
+                x1="0"
+                y1={(size + padding) / 2}
+                x2={size + padding}
+                y2={(size + padding) / 2}
+                stroke={lineSpaceColor}
+                strokeWidth={lineSpaceWidth}
+              />
+            </>
+          )}
         </Svg>
-        {children && <View style={localChildrenContainerStyle}>{children(fill)}</View>}
+        {children && (
+          <View style={localChildrenContainerStyle}>{children(fill)}</View>
+        )}
       </View>
     );
   }
@@ -139,6 +183,8 @@ CircularProgress.propTypes = {
   tintColor: PropTypes.string,
   tintTransparency: PropTypes.bool,
   backgroundColor: PropTypes.string,
+  lineSpaceWidth: PropTypes.number,
+  lineSpaceColor: PropTypes.string,
   rotation: PropTypes.number,
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
@@ -151,12 +197,14 @@ CircularProgress.propTypes = {
 };
 
 CircularProgress.defaultProps = {
-  tintColor: 'black',
+  tintColor: "black",
+  lineSpaceWidth: 2,
+  lineSpaceColor: "white",
   tintTransparency: true,
   rotation: 90,
-  lineCap: 'butt',
+  lineCap: "butt",
   arcSweepAngle: 360,
   padding: 0,
   dashedBackground: { width: 0, gap: 0 },
-  dashedTint: { width: 0, gap: 0 },
+  dashedTint: { width: 0, gap: 0 }
 };
