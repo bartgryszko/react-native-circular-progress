@@ -36,7 +36,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
     const useNativeDriver = this.props.useNativeDriver;
-    
+
     const anim = Animated.timing(this.state.fillAnimation, {
       useNativeDriver,
       toValue,
@@ -49,13 +49,17 @@ export default class AnimatedCircularProgress extends React.PureComponent {
   }
 
   animateColor() {
-    if (!this.props.tintColorSecondary) {
+    if (!this.props.secondTintColor) {
       return this.props.tintColor
     }
 
+    if (!this.props.thirdTintColor) {
+      return this.props.secondTintColor
+    }
+
     const tintAnimation = this.state.fillAnimation.interpolate({
-      inputRange: [0, 100],
-      outputRange: [this.props.tintColor, this.props.tintColorSecondary]
+      inputRange: [0, 50, 100],
+      outputRange: [this.props.tintColor, this.props.secondTintColor, this.props.thirdTintColor]
     })
 
     return tintAnimation

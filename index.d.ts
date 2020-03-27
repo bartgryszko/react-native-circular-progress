@@ -48,12 +48,20 @@ declare module 'react-native-circular-progress' {
     tintColor?: string;
 
     /**
-     * Change the fill color from tintColor to tintColorSecondary as animation progresses.
-     *
+     * Change the fill color from the first to the second color as animation progresses.
+     * 
      * @type {string}
      * @default 'undefined'
      */
-    tintColorSecondary?: string;
+    secondTintColor?: string;
+
+    /**
+     * Change the fill color from the second color to the third color as animation progresses.
+     * 
+     * @type {string}
+     * @default 'undefined'
+     */
+    thirdTintColor?: string;
 
     /**
      * Current progress / tint transparency
@@ -181,7 +189,7 @@ declare module 'react-native-circular-progress' {
 
   export class AnimatedCircularProgress extends React.Component<
     AnimatedCircularProgressProps
-  > {
+    > {
     /**
      * Animate the progress bar to a specific value
      *
