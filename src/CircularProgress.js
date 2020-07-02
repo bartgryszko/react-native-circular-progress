@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes } from 'react-native';
+import { View } from 'react-native';
 import { Svg, Path, G } from 'react-native-svg';
 
 export default class CircularProgress extends React.PureComponent {
@@ -131,7 +131,7 @@ export default class CircularProgress extends React.PureComponent {
 }
 
 CircularProgress.propTypes = {
-  style: ViewPropTypes.style,
+  style: PropTypes.object,
   size: PropTypes.number.isRequired,
   fill: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
@@ -143,7 +143,7 @@ CircularProgress.propTypes = {
   lineCap: PropTypes.string,
   arcSweepAngle: PropTypes.number,
   children: PropTypes.func,
-  childrenContainerStyle: ViewPropTypes.style,
+  childrenContainerStyle: PropTypes.object,
   padding: PropTypes.number,
   renderCap: PropTypes.func,
   dashedBackground: PropTypes.object,
