@@ -3,6 +3,7 @@ declare module 'react-native-circular-progress' {
   import {
     Animated,
     Easing,
+    EasingFunction,
     ViewPropTypes,
     StyleProp,
     ViewStyle
@@ -138,7 +139,7 @@ declare module 'react-native-circular-progress' {
      * @type {Function}
      * @default Easing.out(Easing.ease)
      */
-    easing?: () => void;
+    easing?: EasingFunction;
 
     /**
      * Function that's invoked when the animation completes (both on mount and if called with .animate())
@@ -189,7 +190,7 @@ declare module 'react-native-circular-progress' {
      * @param {number} duration
      * @param {Function} ease
      */
-    animate: (toVal: number, duration: number, ease?: Function) => Animated.CompositeAnimation;
+    animate: (toVal: number, duration: number, ease?: EasingFunction) => Animated.CompositeAnimation;
 
     /**
      * Re-run animation with a specified prefill-value
@@ -203,7 +204,7 @@ declare module 'react-native-circular-progress' {
       prefill: number,
       toVal: number,
       duration: number,
-      ease?: Function
+      ease?: EasingFunction
     ) => void;
   }
 }
