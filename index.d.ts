@@ -88,6 +88,14 @@ declare module 'react-native-circular-progress' {
     lineCap?: 'butt' | 'round' | 'square';
 
     /**
+     * Shape used at ends of progress line.
+     *
+     * @type {('butt' | 'round' | 'square')}
+     * @default lineCap - which is 'butt'
+     */
+    fillLineCap?: 'butt' | 'round' | 'square';
+
+    /**
      * If you don't want a full circle, specify the arc angle
      *
      * @type {number}
