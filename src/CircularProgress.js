@@ -33,6 +33,7 @@ export default class CircularProgress extends React.PureComponent {
       style,
       rotation,
       lineCap,
+      fillLineCap = lineCap,
       arcSweepAngle,
       fill,
       children,
@@ -116,7 +117,7 @@ export default class CircularProgress extends React.PureComponent {
                 d={circlePath}
                 stroke={tintColor}
                 strokeWidth={width}
-                strokeLinecap={lineCap}
+                strokeLinecap={fillLineCap}
                 strokeDasharray={strokeDasharrayTint}
                 fill="transparent"
               />
