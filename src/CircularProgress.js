@@ -136,7 +136,7 @@ CircularProgress.propTypes = {
   size: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.instanceOf(Animated.Value),
-  ]),
+  ]).isRequired,
   fill: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   backgroundWidth: PropTypes.number,
