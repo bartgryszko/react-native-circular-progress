@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Animated, View } from 'react-native';
 import { Svg, Path, G } from 'react-native-svg';
 
 export default class CircularProgress extends React.PureComponent {
@@ -133,7 +133,10 @@ export default class CircularProgress extends React.PureComponent {
 
 CircularProgress.propTypes = {
   style: PropTypes.object,
-  size: PropTypes.number.isRequired,
+  size: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.instanceOf(Animated.Value),
+  ]),
   fill: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   backgroundWidth: PropTypes.number,
