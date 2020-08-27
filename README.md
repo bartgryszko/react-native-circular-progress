@@ -114,6 +114,7 @@ prefill             | number (0-100)         | 0                       | Initial
 duration            | number                 | 500                     | Duration of animation in ms
 easing              | function               | Easing.out(Easing.ease) | Animation easing function
 onAnimationComplete | function               |                         | Function that's invoked when the animation completes (both on mount and if called with `.animate()`)
+onFillChange        | function               |                         | Function that returns current progress on every change
 tintColorSecondary  | string                 | the same as tintColor   | To change fill color from tintColor to tintColorSecondary as animation progresses
 
 `AnimatedCircularProgress` also exposes the following functions:
