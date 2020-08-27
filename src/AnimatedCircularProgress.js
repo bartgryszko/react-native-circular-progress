@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Animated, Easing } from 'react-native';
-import CircularProgress from './CircularProgress';
+import React from "react";
+import PropTypes from "prop-types";
+import { Animated, Easing } from "react-native";
+import CircularProgress from "./CircularProgress";
 const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
 export default class AnimatedCircularProgress extends React.PureComponent {
@@ -10,6 +10,10 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     this.state = {
       fillAnimation: new Animated.Value(props.prefill),
     };
+
+    this.state.fillAnimation.addListener(({ value }) =>
+      props.onFillChange(value)
+    );
   }
 
   componentDidMount() {
@@ -36,7 +40,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
     const useNativeDriver = this.props.useNativeDriver;
-    
+
     const anim = Animated.timing(this.state.fillAnimation, {
       useNativeDriver,
       toValue,
@@ -50,21 +54,27 @@ export default class AnimatedCircularProgress extends React.PureComponent {
 
   animateColor() {
     if (!this.props.tintColorSecondary) {
-      return this.props.tintColor
+      return this.props.tintColor;
     }
 
     const tintAnimation = this.state.fillAnimation.interpolate({
       inputRange: [0, 100],
-      outputRange: [this.props.tintColor, this.props.tintColorSecondary]
-    })
+      outputRange: [this.props.tintColor, this.props.tintColorSecondary],
+    });
 
-    return tintAnimation
+    return tintAnimation;
   }
 
   render() {
     const { fill, prefill, ...other } = this.props;
 
-    return <AnimatedProgress {...other} fill={this.state.fillAnimation} tintColor={this.animateColor()} />;
+    return (
+      <AnimatedProgress
+        {...other}
+        fill={this.state.fillAnimation}
+        tintColor={this.animateColor()}
+      />
+    );
   }
 }
 
