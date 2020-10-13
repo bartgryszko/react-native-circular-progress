@@ -186,6 +186,14 @@ declare module 'react-native-circular-progress' {
      * @default '{ width: 0, gap: 0 }'
      */
     dashedBackground?: { width: number; gap: number };
+
+    /**
+     * Use react-native Animated's native driver for animations
+     * 
+     * @type {boolean}
+     * @default false
+     */
+    useNativeDriver?: boolean;
   }
 
   export class AnimatedCircularProgress extends React.Component<
