@@ -25,20 +25,19 @@ declare module 'react-native-circular-progress' {
     width: number;
 
     /**
+     * Current progress / fill
+     *
+     * @type {number}
+     */
+    fill: number;
+
+    /**
      * Thickness of background circle
      *
      * @type {number}
      * @default width
      */
     backgroundWidth?: number;
-
-    /**
-     * Current progress / fill
-     *
-     * @type {number}
-     * @default 0
-     */
-    fill?: number;
 
     /**
      * Color of the progress line
