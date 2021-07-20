@@ -116,6 +116,8 @@ easing              | function               | Easing.out(Easing.ease) | Animati
 onAnimationComplete | function               |                         | Function that's invoked when the animation completes (both on mount and if called with `.animate()`)
 onFillChange        | function               |                         | Function that returns current progress on every change
 tintColorSecondary  | string                 | the same as tintColor   | To change fill color from tintColor to tintColorSecondary as animation progresses
+secondFill          | number                 |                         | Second bar current progress / fill
+secondFillTintColor | string                 | the same as tintColor   | To change second fill color
 
 `AnimatedCircularProgress` also exposes the following functions:
 
