@@ -28,6 +28,7 @@ export default class CircularProgress extends React.PureComponent {
       width,
       backgroundWidth,
       tintColor,
+      secondFillTintColor,
       tintTransparency,
       backgroundColor,
       style,
@@ -36,6 +37,7 @@ export default class CircularProgress extends React.PureComponent {
       fillLineCap = lineCap,
       arcSweepAngle,
       fill,
+      secondFill,
       children,
       childrenContainerStyle,
       padding,
@@ -49,11 +51,14 @@ export default class CircularProgress extends React.PureComponent {
     const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
     const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
+
+    const currentFillSecondAngle = secondFill ? (arcSweepAngle * this.clampFill(secondFill + fill)) / 100 : 0;
+
     const backgroundPath = this.circlePath(
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      tintTransparency ? 0 : currentFillAngle,
+      tintTransparency ? 0 : currentFillAngle + currentFillSecondAngle,
       arcSweepAngle
     );
     const circlePath = this.circlePath(
@@ -63,11 +68,20 @@ export default class CircularProgress extends React.PureComponent {
       0,
       currentFillAngle
     );
+
+    const secondCirclePath = secondFill && this.circlePath(
+      sizeWithPadding,
+      sizeWithPadding,
+      radius,
+      currentFillAngle,
+      currentFillSecondAngle
+    ); 
+
     const coordinate = this.polarToCartesian(
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      currentFillAngle
+      currentFillAngle 
     );
     const cap = this.props.renderCap ? this.props.renderCap({ center: coordinate }) : null;
 
@@ -122,6 +136,16 @@ export default class CircularProgress extends React.PureComponent {
                 fill="transparent"
               />
             )}
+            {secondFill && (
+              <Path
+                d={secondCirclePath}
+                stroke= {secondFillTintColor ? secondFillTintColor : tintColor}
+                strokeWidth={width}
+                strokeLinecap={fillLineCap}
+                strokeDasharray={strokeDasharrayTint}
+                fill="transparent"
+              />
+            )}
             {cap}
           </G>
         </Svg>
@@ -138,9 +162,11 @@ CircularProgress.propTypes = {
     PropTypes.instanceOf(Animated.Value),
   ]).isRequired,
   fill: PropTypes.number.isRequired,
+  secondFill: PropTypes.number,
   width: PropTypes.number.isRequired,
   backgroundWidth: PropTypes.number,
   tintColor: PropTypes.string,
+  secondFillTintColor: PropTypes.string,
   tintTransparency: PropTypes.bool,
   backgroundColor: PropTypes.string,
   rotation: PropTypes.number,
