@@ -81,7 +81,7 @@ export default class CircularProgress extends React.PureComponent {
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      currentFillAngle 
+      currentFillAngle + currentFillSecondAngle
     );
     const cap = this.props.renderCap ? this.props.renderCap({ center: coordinate }) : null;
 
