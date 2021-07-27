@@ -41,14 +41,15 @@ export default class CircularProgress extends React.PureComponent {
       padding,
       renderCap,
       dashedBackground,
-      dashedTint
+      dashedTint,
+      maximumValue = 100
     } = this.props;
 
     const maxWidthCircle = backgroundWidth ? Math.max(width, backgroundWidth) : width;
     const sizeWithPadding = size / 2 + padding / 2;
     const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
-    const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
+    const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / maximumValue;
     const backgroundPath = this.circlePath(
       sizeWithPadding,
       sizeWithPadding,
