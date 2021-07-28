@@ -165,4 +165,12 @@ CircularProgress.propTypes = {
 };
 
 CircularProgress.defaultProps = {
-  tint
+  tintColor: 'black',
+  tintTransparency: true,
+  rotation: 90,
+  lineCap: 'butt',
+  arcSweepAngle: 360,
+  padding: 0,
+  dashedBackground: { width: 0, gap: 0 },
+  dashedTint: { width: 0, gap: 0 },
+};
