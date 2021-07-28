@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Animated, View } from 'react-native';
 import { Svg, Path, G } from 'react-native-svg';
+import GradientPath from 'react-native-svg-path-gradient';
 
 export default class CircularProgress extends React.PureComponent {
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -113,14 +114,23 @@ export default class CircularProgress extends React.PureComponent {
               />
             )}
             {fill > 0 && (
-              <Path
-                d={circlePath}
-                stroke={tintColor}
-                strokeWidth={width}
-                strokeLinecap={fillLineCap}
-                strokeDasharray={strokeDasharrayTint}
-                fill="transparent"
-              />
+              // <Path
+              //   d={circlePath}
+              //   stroke={tintColor}
+              //   strokeWidth={width}
+              //   strokeLinecap={fillLineCap}
+              //   strokeDasharray={strokeDasharrayTint}
+              //   fill="transparent"
+              // />
+              <GradientPath
+              d={circlePath}
+              colors={['#20DCCB', '#1152EE']}
+              strokeWidth={width}
+              fill="transparent"
+              strokeDasharray={strokeDasharrayTint}
+              strokeLinecap={fillLineCap}
+              roundedCorners
+            />
             )}
             {cap}
           </G>
@@ -155,12 +165,4 @@ CircularProgress.propTypes = {
 };
 
 CircularProgress.defaultProps = {
-  tintColor: 'black',
-  tintTransparency: true,
-  rotation: 90,
-  lineCap: 'butt',
-  arcSweepAngle: 360,
-  padding: 0,
-  dashedBackground: { width: 0, gap: 0 },
-  dashedTint: { width: 0, gap: 0 },
-};
+  tint
