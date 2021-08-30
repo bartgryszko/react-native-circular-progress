@@ -22,7 +22,7 @@ export default class CircularProgress extends React.Component {
   }
 
   pointPath(circlePath, cx, cy, r, width, startDegree, endDegree) {
-    const {x1, y1, x2, y2, x3, y3} = this.getPointPoints(circlePath, cx, cy, r, width, startDegree, endDegree);
+    const { x1, y1, x2, y2, x3, y3 } = this.getPointPoints(circlePath, cx, cy, r, width, startDegree, endDegree);
 
     const p = Path();
     p.moveTo(x1, y1);
@@ -43,21 +43,21 @@ export default class CircularProgress extends React.Component {
     const py = cy + (r * Math.sin(aRad));
 
     // get the radius line between the center of the circle and the ending point
-    const {rise, run} = this.getSlope(cx, cy, px, py);
+    const { rise, run } = this.getSlope(cx, cy, px, py);
     const slope = rise / (run || 0.0000000001);
-    const b = -(slope*cx) + cy;
+    const b = -(slope * cx) + cy;
 
     // get the two points half the width away from the center along the radius line
     const bump = this.getXBump((width - 2) / 2, slope);
     const x1 = px + bump;
     const x2 = px - bump;
-    const y1 = (slope*x1) + b;
-    const y2 = (slope*x2) + b;
+    const y1 = (slope * x1) + b;
+    const y2 = (slope * x2) + b;
 
-    const {tx, ty} = this.getTriangleTip(x1, y1, x2, y2, rise, run, width/2, aDeg <= 180);
+    const { tx, ty } = this.getTriangleTip(x1, y1, x2, y2, rise, run, width / 2, aDeg <= 180);
     const x3 = tx, y3 = ty;
 
-    return {x1, y1, x2, y2, x3, y3};
+    return { x1, y1, x2, y2, x3, y3 };
   }
 
   // for getting a point a certain distance away
@@ -73,7 +73,7 @@ export default class CircularProgress extends React.Component {
 
     // perpendicular line
     const pslope = -1 * run / (rise || 0.0000000001);
-    const b = -(pslope*mx) + my;
+    const b = -(pslope * mx) + my;
 
     // point distance away
     let bump = this.getXBump(height, pslope);
@@ -81,24 +81,24 @@ export default class CircularProgress extends React.Component {
       bump = -1 * bump;
     }
     const tx = mx + bump;
-    const ty = (pslope*tx) + b;
+    const ty = (pslope * tx) + b;
 
-    return {tx, ty};
+    return { tx, ty };
   }
 
   getSlope(cx, cy, px, py) {
     const rise = cy - py;
     const run = cx - px;
     const slope = this.reduce(rise, run);
-    return {rise: slope[0], run: slope[1]};
+    return { rise: slope[0], run: slope[1] };
   }
 
-  reduce(numerator,denominator){
-    const getgcd = (a,b) => {
-      return b ? getgcd(b, a%b) : a;
+  reduce(numerator, denominator) {
+    const getgcd = (a, b) => {
+      return b ? getgcd(b, a % b) : a;
     };
-    const gcd = getgcd(numerator,denominator);
-    return [numerator/gcd, denominator/gcd];
+    const gcd = getgcd(numerator, denominator);
+    return [numerator / gcd, denominator / gcd];
   }
 
   clampFill = fill => Math.min(100, Math.max(0, fill));
@@ -122,6 +122,7 @@ export default class CircularProgress extends React.Component {
       arcSweepAngle,
       renderChild,
       fill,
+      padding
     } = this.props;
 
     const halfSize = size / 2;
@@ -145,13 +146,13 @@ export default class CircularProgress extends React.Component {
     return (
       <View style={style}>
         <Surface
-          width={size}
-          height={size}
+          width={padding ? size + padding : size}
+          height={padding ? size + padding : size}
           key={this.state.appState}
           style={{ backgroundColor: 'transparent' }}
         >
-          <Group rotation={rotation - 90} originX={size/2} originY={size/2}>
-            { backgroundColor && (
+          <Group rotation={rotation - 90} originX={padding ? ((size + (padding / 2)) / 2) : size / 2} originY={padding ? ((size + (padding / 2)) / 2) : size / 2}>
+            {backgroundColor && (
               <Shape
                 d={backgroundPath}
                 stroke={backgroundColor}
@@ -165,14 +166,14 @@ export default class CircularProgress extends React.Component {
               strokeWidth={width}
               strokeCap={lineCap == 'point' ? 'butt' : lineCap}
             />
-          { lineCap == 'point' && (
-            <Shape
-              d={pointPath}
-              fill={tintColor}
-              stroke={tintColor}
-              strokeWidth={1}
-            />
-          )}
+            {lineCap == 'point' && (
+              <Shape
+                d={pointPath}
+                fill={tintColor}
+                stroke={tintColor}
+                strokeWidth={1}
+              />
+            )}
           </Group>
         </Surface>
         {renderChild && (
