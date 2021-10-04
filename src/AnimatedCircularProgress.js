@@ -10,7 +10,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     this.state = {
       fillAnimation: new Animated.Value(props.prefill),
     };
-    if(props.onFillChange){
+    if (props.onFillChange) {
       this.state.fillAnimation.addListener(({ value }) =>
         props.onFillChange(value)
       );
@@ -41,12 +41,14 @@ export default class AnimatedCircularProgress extends React.PureComponent {
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
     const useNativeDriver = this.props.useNativeDriver;
+    const delay = this.props.delay;
 
     const anim = Animated.timing(this.state.fillAnimation, {
       useNativeDriver,
       toValue,
       easing,
       duration,
+      delay,
     });
     anim.start(this.props.onAnimationComplete);
 
@@ -86,6 +88,7 @@ AnimatedCircularProgress.propTypes = {
   easing: PropTypes.func,
   onAnimationComplete: PropTypes.func,
   useNativeDriver: PropTypes.bool,
+  delay: PropTypes.number,
 };
 
 AnimatedCircularProgress.defaultProps = {
@@ -93,4 +96,5 @@ AnimatedCircularProgress.defaultProps = {
   easing: Easing.out(Easing.ease),
   prefill: 0,
   useNativeDriver: false,
+  delay: 0,
 };
