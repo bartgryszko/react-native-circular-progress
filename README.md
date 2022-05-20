@@ -105,6 +105,7 @@ padding               | number                 | 0                       | Paddi
 dashedBackground      | object                 | { width: 0, gap: 0 }    | Bar background as dashed type
 dashedTint            | object                 | { width: 0, gap: 0 }    | Bar tint as dashed type
 renderCap             | function               | undefined               | Function that's invoked during rendering to draw at the tip of the progress circle
+maximumValue             | number               | 100               | Set your maximum value for the full circle
 
 The following props can further be used on `AnimatedCircularProgress`:
 
