@@ -112,6 +112,7 @@ Name                | Type                   | Default value           | Descrip
 --------------------|------------------------|-------------------------|--------------
 prefill             | number (0-100)         | 0                       | Initial fill-value before animation starts
 duration            | number                 | 500                     | Duration of animation in ms
+delay               | number                 | 0                       | Delay of animation in ms
 easing              | function               | Easing.out(Easing.ease) | Animation easing function
 onAnimationComplete | function               |                         | Function that's invoked when the animation completes (both on mount and if called with `.animate()`)
 onFillChange        | function               |                         | Function that returns current progress on every change

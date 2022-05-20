@@ -142,6 +142,14 @@ declare module 'react-native-circular-progress' {
     duration?: number;
 
     /**
+     * Delay of animation in ms
+     *
+     * @type {number}
+     * @default 0
+     */
+    delay?: number;
+
+    /**
      *
      * @type {Function}
      * @default Easing.out(Easing.ease)
