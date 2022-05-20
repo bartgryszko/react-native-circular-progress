@@ -4,10 +4,10 @@ declare module 'react-native-circular-progress' {
     Animated,
     Easing,
     EasingFunction,
-    ViewPropTypes,
     StyleProp,
     ViewStyle
   } from 'react-native';
+  import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
   export interface AnimatedCircularProgressProps {
     /**
