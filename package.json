@@ -1,6 +1,6 @@
 {
   "name": "react-native-circular-progress",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "React Native component for creating animated, circular progress with react-native-svg",
   "main": "index.js",
   "repository": {
@@ -25,10 +25,9 @@
   },
   "homepage": "https://github.com/bgryszko/react-native-circular-progress",
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.8.1"
   },
   "peerDependencies": {
-    "deprecated-react-native-prop-types": "^2.3.0",
     "react": ">=16.0.0",
     "react-native": ">=0.50.0",
     "react-native-svg": ">=7.0.0"

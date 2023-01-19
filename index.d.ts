@@ -2,12 +2,10 @@ declare module 'react-native-circular-progress' {
   import * as React from 'react';
   import {
     Animated,
-    Easing,
     EasingFunction,
     StyleProp,
     ViewStyle
   } from 'react-native';
-  import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
   export interface AnimatedCircularProgressProps {
     /**
@@ -105,7 +103,7 @@ declare module 'react-native-circular-progress' {
     /**
      * Style of the entire progress container
      *
-     * @type {ViewPropTypes.style}
+     * @type {StyleProp<ViewStyle>}
      */
     style?: StyleProp<ViewStyle>;
 
@@ -121,7 +119,7 @@ declare module 'react-native-circular-progress' {
     /**
      * Style of the children container
      *
-     * @type {ViewPropTypes.style}
+     * @type {StyleProp<ViewStyle>}
      */
     childrenContainerStyle?: StyleProp<ViewStyle>;
 
