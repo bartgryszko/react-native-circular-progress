@@ -7,7 +7,89 @@ declare module 'react-native-circular-progress' {
     ViewStyle
   } from 'react-native';
 
-  export interface AnimatedCircularProgressProps {
+  export interface AnimatedCircularProgressProps extends CircularProgressProps {
+
+    /**
+     * Angle from which the progress starts from
+     *
+     * @type {number}
+     * @default 90
+     */
+    rotation?: number;
+
+    /**
+     * Initial fill-value before animation starts
+     *
+     * @type {number}
+     * @default 0
+     */
+    prefill?: number;
+
+    /**
+     * Duration of animation in ms
+     *
+     * @type {number}
+     * @default 500
+     */
+    duration?: number;
+
+    /**
+     * Delay of animation in ms
+     *
+     * @type {number}
+     * @default 0
+     */
+    delay?: number;
+
+    /**
+     *
+     * @type {Function}
+     * @default Easing.out(Easing.ease)
+     */
+    easing?: EasingFunction;
+
+    /**
+     * Function that's invoked when the animation completes (both on mount and if called with .animate())
+     *
+     */
+    onAnimationComplete?: (event: { finished: boolean }) => void;
+  }
+
+  export class AnimatedCircularProgress extends React.Component<
+    AnimatedCircularProgressProps
+  > {
+    /**
+     * Animate the progress bar to a specific value
+     *
+     * @param {number} toVal
+     * @param {number} duration
+     * @param {Function} ease
+     */
+    animate: (toVal: number, duration: number, ease?: EasingFunction) => Animated.CompositeAnimation;
+
+    /**
+     * Re-run animation with a specified prefill-value
+     *
+     * @param {number} prefill
+     * @param {number} toVal
+     * @param {number} duration
+     * @param {Function} ease
+     */
+    reAnimate: (
+      prefill: number,
+      toVal: number,
+      duration: number,
+      ease?: EasingFunction
+    ) => void;
+  }
+
+  export interface CircularProgressProps {
+    /**
+     * Style of the entire progress container
+     *
+     * @type {StyleProp<ViewStyle>}
+     */
+    style?: StyleProp<ViewStyle>;
     /**
      * Width and height of circle
      *
@@ -45,13 +127,6 @@ declare module 'react-native-circular-progress' {
      */
     tintColor?: string;
 
-    /**
-     * Change the fill color from tintColor to tintColorSecondary as animation progresses.
-     *
-     * @type {string}
-     * @default 'undefined'
-     */
-    tintColorSecondary?: string;
 
     /**
      * Current progress / tint transparency
@@ -101,13 +176,6 @@ declare module 'react-native-circular-progress' {
     arcSweepAngle?: number;
 
     /**
-     * Style of the entire progress container
-     *
-     * @type {StyleProp<ViewStyle>}
-     */
-    style?: StyleProp<ViewStyle>;
-
-    /**
      * Pass a function as a child. It receiveds the current fill-value as an argument
      *
      * @type {Function}
@@ -122,43 +190,6 @@ declare module 'react-native-circular-progress' {
      * @type {StyleProp<ViewStyle>}
      */
     childrenContainerStyle?: StyleProp<ViewStyle>;
-
-    /**
-     * Initial fill-value before animation starts
-     *
-     * @type {number}
-     * @default 0
-     */
-    prefill?: number;
-
-    /**
-     * Duration of animation in ms
-     *
-     * @type {number}
-     * @default 500
-     */
-    duration?: number;
-
-    /**
-     * Delay of animation in ms
-     *
-     * @type {number}
-     * @default 0
-     */
-    delay?: number;
-
-    /**
-     *
-     * @type {Function}
-     * @default Easing.out(Easing.ease)
-     */
-    easing?: EasingFunction;
-
-    /**
-     * Function that's invoked when the animation completes (both on mount and if called with .animate())
-     *
-     */
-    onAnimationComplete?: (event: { finished: boolean }) => void;
 
     /**
      * Padding applied around the circle to allow for a cap that bleeds outside its boundary
@@ -193,31 +224,7 @@ declare module 'react-native-circular-progress' {
     dashedBackground?: { width: number; gap: number };
   }
 
-  export class AnimatedCircularProgress extends React.Component<
-    AnimatedCircularProgressProps
-  > {
-    /**
-     * Animate the progress bar to a specific value
-     *
-     * @param {number} toVal
-     * @param {number} duration
-     * @param {Function} ease
-     */
-    animate: (toVal: number, duration: number, ease?: EasingFunction) => Animated.CompositeAnimation;
+  export class CircularProgress extends React.Component<CircularProgressProps> {
 
-    /**
-     * Re-run animation with a specified prefill-value
-     *
-     * @param {number} prefill
-     * @param {number} toVal
-     * @param {number} duration
-     * @param {Function} ease
-     */
-    reAnimate: (
-      prefill: number,
-      toVal: number,
-      duration: number,
-      ease?: EasingFunction
-    ) => void;
   }
 }
