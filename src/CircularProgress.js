@@ -13,7 +13,7 @@ export default class CircularProgress extends React.PureComponent {
   }
 
   circlePath(x, y, radius, startAngle, endAngle) {
-    var start = this.polarToCartesian(x, y, radius, endAngle * 0.9999);
+    var start = this.polarToCartesian(x, y, radius, endAngle * 0.9999999);
     var end = this.polarToCartesian(x, y, radius, startAngle);
     var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
     var d = ['M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y];
