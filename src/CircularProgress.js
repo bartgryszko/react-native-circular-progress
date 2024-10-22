@@ -132,7 +132,10 @@ export default class CircularProgress extends React.PureComponent {
 }
 
 CircularProgress.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([
+    PropTypes.object, 
+    PropTypes.array,
+  ]),
   size: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.instanceOf(Animated.Value),
