@@ -93,6 +93,7 @@ width                 | number                 | **required**            | Thick
 backgroundWidth       | number                 | width                   | Thickness of background circle
 fill                  | number (0-100)         | 0                       | Current progress / fill
 tintColor             | string                 | black                   | Color of the progress line
+tintColorSecondary    | string                 | black                   | Secondary color of the progress line
 tintTransparency      | boolean                | true                    | Transparency of the progress line
 backgroundColor       | string                 |                         | If unspecified, no background line will be rendered
 rotation              | number (-360 - 360)    | 90                      | Angle from which the progress starts from
