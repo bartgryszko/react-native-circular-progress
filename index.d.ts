@@ -127,6 +127,13 @@ declare module 'react-native-circular-progress' {
      */
     tintColor?: string;
 
+    /**
+     * Secondary color of the progress line
+     *
+     * @type {string}
+     * @default 'black'
+     */
+    tintColorSecondary?: string;
 
     /**
      * Current progress / tint transparency
